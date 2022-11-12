@@ -1,13 +1,9 @@
-import express from 'express'
+import { container } from './container'
+import { TYPES } from './types'
+import { IServer } from './presentation/server'
 
-function main() {
-  const app = express()
-  const port = 3000
-
-  app.get('/', (req, res) => res.send('Express skeleton'))
-  app.listen(port, () => {
-    console.log(`[server] server dimulai di http://localhost:${port} ⚡`)
-  })
+const start = async () => {
+  const server = container.get<IServer>(TYPES.Server)
+  return server.start()
 }
-
-main()
+start()
