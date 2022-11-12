@@ -10,16 +10,16 @@ export interface RoleDto {
 
 export interface UserRoleCreateDto {
   user_id: string
-  role_id: string
+  role_id: string | string[]
 }
 
 export interface UserRoleRemoveDto {
   user_id: string
-  role_id: string
+  role_id: string | string[]
 }
 
 export interface UserRoleDto {
   id: string
   user_id: string
-  role_id: string
+  role_id: string | string[]
 }

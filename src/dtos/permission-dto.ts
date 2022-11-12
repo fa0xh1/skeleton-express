@@ -11,11 +11,11 @@ export interface PermissionDto {
 
 export interface RolePermissionCreateDto {
   role_id: string
-  permission_id: string
+  permission_id: string | string[]
 }
 
 export interface RolePermissionDto {
   id: string
   role_id: string
-  permission_id: string
+  permission_id: string | string[]
 }
