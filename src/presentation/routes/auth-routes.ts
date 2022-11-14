@@ -1,17 +1,28 @@
 import { Router } from 'express'
-import { injectable } from 'inversify'
+import { injectable, inject } from 'inversify'
 import asyncWrap from '../../../src/libs/asyncWrapper'
 import { container } from '../../../src/container'
 import AuthController from '../controllers/auth-controller'
+import { AuthMiddleware } from '../middlewares/check-jwt'
+import { TYPES } from '../../../src/types'
 @injectable()
 export class AuthRoutes {
   public route = 'Auth'
-  UserControllerInstance = container.get<AuthController>(AuthController)
+  AuthControllerInstance = container.get<AuthController>(AuthController)
+  @inject(TYPES.AuthMiddleware) private _authMiddleware!: AuthMiddleware
+
   public setRoutes(router: Router) {
     router.post(
       `/${this.route}/login`,
       asyncWrap(
-        this.UserControllerInstance.login.bind(this.UserControllerInstance),
+        this.AuthControllerInstance.login.bind(this.AuthControllerInstance),
+      ),
+    )
+    router.get(
+      `/${this.route}/me`,
+      this._authMiddleware.checkJwt,
+      asyncWrap(
+        this.AuthControllerInstance.me.bind(this.AuthControllerInstance),
       ),
     )
   }

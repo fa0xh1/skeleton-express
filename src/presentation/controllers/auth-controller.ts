@@ -1,8 +1,10 @@
 import { Request, Response } from 'express'
 import { inject, injectable } from 'inversify'
+import { AuthDtoMapper } from '../../../src/dtos/mappers/auth-mapper'
 import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
 import { AuthService } from '../../../src/services/auth-service'
 import { TYPES } from '../../types'
+import { Authorization } from '../../libs/authorization'
 @injectable()
 export default class AuthController {
   @inject(TYPES.AuthService) private _authService!: AuthService
@@ -14,5 +16,10 @@ export default class AuthController {
       success: true,
       token: `jwt ${token}`,
     })
+  }
+
+  public async me(req: Request, res: Response): Promise<void> {
+    // await res.locals.checkRole('kontol')
+    res.send(await res.locals.Authorization)
   }
 }

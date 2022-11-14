@@ -25,6 +25,7 @@ User.belongsToMany(Role, {
   through: UserRole,
   foreignKey: 'user_id',
   otherKey: 'role_id',
+  // as: 'role',
 })
 
 Role.belongsToMany(User, {

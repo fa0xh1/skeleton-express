@@ -3,12 +3,13 @@ import { TYPES } from '../types'
 import { IUserRepository } from '../../src/domain/service/interface-user-repository'
 import { UserCreateDto, UserUpdateDto, UserDto } from '../../src/dtos/user-dto'
 import { UserMapper } from '../../src/dtos/mappers/user-mapper'
+import { IAdminPrincipal } from '../../src/libs/authorization'
 
 @injectable()
 export class UserService {
   @inject(TYPES.UserRepository) private _repository!: IUserRepository
 
-  public async findAll(): Promise<UserDto[]> {
+  public async findAll(admin: IAdminPrincipal): Promise<UserDto[]> {
     const users = await this._repository.findAll()
     const userDto = users.map((user) => UserMapper.domainToDto(user))
     return userDto
