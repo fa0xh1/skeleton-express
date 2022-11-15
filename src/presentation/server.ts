@@ -4,6 +4,7 @@ import { container } from '../container'
 import { Bootstrap } from './bootstrap'
 import { Routes } from './routes/routes'
 const port = process.env.PORT || 3000
+console.log(process.env.PORT)
 
 export interface IServer {
   start(): Application
