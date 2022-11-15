@@ -12,27 +12,33 @@ type UserRoleCreationAttributes = Optional<UserRoleAttributes, 'id'>
 interface UserRoleInstance
   extends Model<UserRoleAttributes, UserRoleCreationAttributes>,
     UserRoleAttributes {
-  createdAt?: Date
-  updatedAt?: Date
+  created_at: Date
+  updated_at: Date
+  deleted_at: Date
 }
 
-const UserRole = sequelize.define<UserRoleInstance>('user_has_role', {
-  id: {
-    allowNull: false,
-    autoIncrement: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    unique: true,
+const UserRole = sequelize.define<UserRoleInstance>(
+  'user_has_role',
+  {
+    id: {
+      allowNull: false,
+      autoIncrement: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      unique: true,
+    },
+    user_id: {
+      type: DataTypes.STRING,
+    },
+    role_id: {
+      type: DataTypes.STRING,
+    },
   },
-  user_id: {
-    allowNull: false,
-    type: DataTypes.STRING,
+  {
+    underscored: true,
+    paranoid: true,
   },
-  role_id: {
-    allowNull: false,
-    type: DataTypes.STRING,
-  },
-})
+)
 UserRole.sync({ alter: { drop: false } })
 
 export { UserRole }

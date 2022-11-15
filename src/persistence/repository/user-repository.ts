@@ -5,6 +5,7 @@ import {
 import { IUserRepository } from '../../domain/service/interface-user-repository'
 import { injectable } from 'inversify'
 import { AppError, HttpCode } from '../../../src/libs/exceptions/app-error'
+import { ResourceNotFound } from '../../../src/libs/errors'
 import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
 import { Role, User, UserInstance } from '../../infrastructure/database/models'
 

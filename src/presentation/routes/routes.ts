@@ -5,6 +5,7 @@ import { AuthRoutes } from './auth-routes'
 import { AccessControllRoutes } from './access-controll-routes'
 import { RoleRoutes } from './role-routes'
 import { PermissionRoutes } from './permission-routes'
+import { CompanyRoutes } from './company-routes'
 
 @injectable()
 export class Routes {
@@ -14,6 +15,7 @@ export class Routes {
     private userRoutes: UserRoutes,
     private roleRoutes: RoleRoutes,
     private permissionRoutes: PermissionRoutes,
+    private companyRoutes: CompanyRoutes,
   ) {}
 
   public setRoutes(router: Router) {
@@ -22,5 +24,6 @@ export class Routes {
     this.roleRoutes.setRoutes(router)
     this.permissionRoutes.setRoutes(router)
     this.accessControllRoutes.setRoutes(router)
+    this.companyRoutes.setRoutes(router)
   }
 }

@@ -15,8 +15,9 @@ type UserCreationAttributes = Sequelize.Optional<UserAttributes, 'id'>
 interface UserInstance
   extends Sequelize.Model<UserInstance, UserCreationAttributes>,
     UserAttributes {
-  created_at: string
-  updated_at: string
+  created_at: Date
+  updated_at: Date
+  deleted_at: Date
   comparePassword: (password: string) => Promise<boolean>
   addRole: Sequelize.BelongsToManyAddAssociationMixin<Role, string | string[]>
   removeRole: Sequelize.BelongsToManyRemoveAssociationMixin<
@@ -25,26 +26,22 @@ interface UserInstance
   >
 }
 
-const User = sequelize.define<UserInstance, UnmarshalledUser>('user', {
-  id: {
-    type: Sequelize.STRING,
-    primaryKey: true,
+const User = sequelize.define<UserInstance, UnmarshalledUser>(
+  'user',
+  {
+    id: {
+      type: Sequelize.STRING,
+      primaryKey: true,
+    },
+    email: Sequelize.STRING,
+    password: Sequelize.STRING,
+    username: Sequelize.STRING,
   },
-  email: {
-    unique: true,
-    allowNull: false,
-    type: Sequelize.STRING,
+  {
+    underscored: true,
+    paranoid: true,
   },
-  password: {
-    allowNull: false,
-    type: Sequelize.STRING,
-  },
-  username: {
-    unique: true,
-    allowNull: false,
-    type: Sequelize.STRING,
-  },
-})
+)
 
 User.beforeSave(async (user: UserInstance) => {
   if (user.password) {

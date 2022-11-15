@@ -12,8 +12,9 @@ type UserPermissionCreationAttributes = Optional<UserPermissionAttributes, 'id'>
 interface UserPermissionInstance
   extends Model<UserPermissionAttributes, UserPermissionCreationAttributes>,
     UserPermissionAttributes {
-  createdAt?: Date
-  updatedAt?: Date
+  created_at: Date
+  updated_at: Date
+  deleted_at: Date
 }
 
 const UserPermission = sequelize.define<UserPermissionInstance>(
@@ -34,6 +35,10 @@ const UserPermission = sequelize.define<UserPermissionInstance>(
       allowNull: false,
       type: DataTypes.STRING,
     },
+  },
+  {
+    underscored: true,
+    paranoid: true,
   },
 )
 UserPermission.sync({ alter: { drop: false } })
