@@ -6,7 +6,7 @@ import { IUserRepository } from '../../domain/service/interface-user-repository'
 import { injectable } from 'inversify'
 // import { ResourceNotFound } from '../../../src/libs/errors'
 import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
-import { User, UserInstance } from '../../infrastructure/database/models'
+import { Role, User, UserInstance } from '../../infrastructure/database/models'
 
 @injectable()
 export class UserSequelizeRepository implements IUserRepository {
@@ -18,14 +18,16 @@ export class UserSequelizeRepository implements IUserRepository {
   }
 
   async findById(id: string): Promise<EntityUser> {
-    const user = await User.findByPk<UserInstance>(id)
+    const user = await User.findByPk<UserInstance>(id, {
+      include: [Role],
+    })
     if (!user) {
       throw {
         statusCode: 404,
         message: 'User was not found',
       }
     }
-
+    // console.log(user.toJSON())
     return UserMapper.toDomain(user)
   }
 

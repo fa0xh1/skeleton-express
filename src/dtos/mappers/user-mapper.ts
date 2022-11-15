@@ -1,5 +1,6 @@
-import { AuthForLoginDto, UserCreateDto, UserDto } from '../user-dto'
+import { UserCreateDto, UserDto } from '../user-dto'
 import { UnmarshalledUser, User } from '../../domain/models/user'
+// import { UserSession } from '../../libs/authorization'
 
 export class UserMapper {
   public static requestToDto(raw: userRequest): UserCreateDto {
@@ -29,15 +30,18 @@ export class UserMapper {
       id: raw.id,
       username: raw.username,
       email: raw.email,
+      roles: raw.roles,
     }
   }
 
   public static toDomain(raw: UnmarshalledUser): User {
+    // console.log(raw.roles)
     return User.create({
       id: raw.id,
       username: raw.username,
       email: raw.email,
       password: raw.password,
+      roles: raw.roles,
     })
   }
 
@@ -48,21 +52,6 @@ export class UserMapper {
       password: raw.password,
     })
   }
-}
-
-export class AuthDtoMapper {
-  public static toDto(raw: authRequest): AuthForLoginDto {
-    return {
-      username: raw.username,
-      password: raw.password,
-    }
-  }
-}
-
-interface authRequest {
-  username: string
-  email: string
-  password: string
 }
 
 interface userRequest {

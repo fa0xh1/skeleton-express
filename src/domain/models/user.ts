@@ -5,6 +5,8 @@ export interface UnmarshalledUser {
   username: string
   email: string
   password: string
+  roles?: Record<string, string>[]
+  permissions?: Record<string, string>[]
 }
 
 export class User extends Entity<UnmarshalledUser> {
@@ -24,7 +26,8 @@ export class User extends Entity<UnmarshalledUser> {
       username: this.username,
       email: this.email,
       password: this.password,
-      // role_id: this.role,
+      roles: this.roles,
+      permissions: this.permissions,
     }
   }
 
@@ -44,7 +47,11 @@ export class User extends Entity<UnmarshalledUser> {
     return this.props.email
   }
 
-  // get role(): number {
-  //   return this.props.role_id
-  // }
+  get roles(): Record<string, string>[] | undefined {
+    return this.props.roles
+  }
+
+  get permissions(): Record<string, string>[] | undefined {
+    return this.props.permissions
+  }
 }

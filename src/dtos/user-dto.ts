@@ -14,6 +14,8 @@ export interface UserDto {
   id: string
   email: string
   username: string
+  roles?: Record<string, string>[]
+  permissions?: Record<string, string>[]
 }
 
 export interface AuthForLoginDto {

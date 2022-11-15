@@ -16,7 +16,7 @@ interface PermissionInstance
   updatedAt?: Date
 }
 
-const Permission = sequelize.define<PermissionInstance>('Permission', {
+const Permission = sequelize.define<PermissionInstance>('permission', {
   id: {
     allowNull: false,
     autoIncrement: false,
