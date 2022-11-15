@@ -10,10 +10,10 @@ import { AuthMiddleware } from '../middlewares/check-jwt'
 export class RoleRoutes {
   public route = 'Role'
   RoleControllerInstance = container.get<RoleController>(RoleController)
-  @inject(TYPES.AuthMiddleware) private _authMiddleware: AuthMiddleware
-  constructor(authMiddleware: AuthMiddleware) {
-    this._authMiddleware = authMiddleware
-  }
+
+  constructor(
+    @inject(TYPES.AuthMiddleware) private _authMiddleware: AuthMiddleware,
+  ) {}
   public setRoutes(router: Router) {
     router.get(
       `/${this.route}`,

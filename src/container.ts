@@ -53,7 +53,10 @@ const container = new Container()
 container.bind<IServer>(TYPES.Server).to(Server).inSingletonScope()
 
 // Middleware And Router
-container.bind(TYPES.AuthMiddleware).to(AuthMiddleware).inSingletonScope()
+container
+  .bind<AuthMiddleware>(TYPES.AuthMiddleware)
+  .to(AuthMiddleware)
+  .inSingletonScope()
 container.bind<Routes>(Routes).toSelf().inSingletonScope()
 container.bind<UserRoutes>(UserRoutes).toSelf().inSingletonScope()
 container.bind<AuthRoutes>(AuthRoutes).toSelf().inSingletonScope()

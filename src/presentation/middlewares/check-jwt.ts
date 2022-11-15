@@ -15,10 +15,7 @@ interface authUser {
 
 @injectable()
 export class AuthMiddleware {
-  @inject(TYPES.AuthService) private _authService: AuthService
-  constructor(authService: AuthService) {
-    this._authService = authService
-  }
+  constructor(@inject(TYPES.AuthService) private _authService: AuthService) {}
   public checkJwt = async (req: Request, res: Response, next: NextFunction) => {
     const token = <string>req.get('Authorization')
     let jwtPayload: authUser

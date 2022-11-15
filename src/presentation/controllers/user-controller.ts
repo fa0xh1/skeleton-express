@@ -7,11 +7,7 @@ import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
 
 @injectable()
 export default class UserController {
-  @inject(TYPES.UserService) private _userService: UserService
-
-  constructor(userService: UserService) {
-    this._userService = userService
-  }
+  constructor(@inject(TYPES.UserService) private _userService: UserService) {}
 
   public async listUsers(req: Request, res: Response): Promise<void> {
     // const userSession: Authorization = await res.locals.Authorization
