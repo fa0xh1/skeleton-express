@@ -6,7 +6,9 @@ import { CompanyMapper } from '../../src/dtos/mappers/company-mapper'
 
 @injectable()
 export class CompanyService {
-  @inject(TYPES.CompanyRepository) private _repository!: ICompanyRepository
+  constructor(
+    @inject(TYPES.CompanyRepository) private _repository: ICompanyRepository,
+  ) {}
 
   public async findAll(): Promise<CompanyDto[]> {
     const companys = await this._repository.findAll()

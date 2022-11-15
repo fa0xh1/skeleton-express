@@ -12,8 +12,9 @@ type RolePermissionCreationAttributes = Optional<RolePermissionAttributes, 'id'>
 interface RolePermissionInstance
   extends Model<RolePermissionAttributes, RolePermissionCreationAttributes>,
     RolePermissionAttributes {
-  createdAt?: Date
-  updatedAt?: Date
+  created_at: Date
+  updated_at: Date
+  deleted_at: Date
 }
 
 const RolePermission = sequelize.define<RolePermissionInstance>(
@@ -32,6 +33,10 @@ const RolePermission = sequelize.define<RolePermissionInstance>(
     permission_id: {
       type: DataTypes.STRING,
     },
+  },
+  {
+    underscored: true,
+    paranoid: true,
   },
 )
 RolePermission.sync({ alter: { drop: false } })

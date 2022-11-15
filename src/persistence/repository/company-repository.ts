@@ -1,7 +1,10 @@
-import { Company as EntityCompany } from '../../domain/models/company'
+import {
+  Company as EntityCompany,
+  UnmarshalledCompany,
+} from '../../domain/models/company'
 import { ICompanyRepository } from '../../domain/service/interface-company-repository'
 import { injectable } from 'inversify'
-import { ResourceNotFound } from '../../../src/libs/errors'
+// import { ResourceNotFound } from '../../../src/libs/errors'
 import { CompanyMapper } from '../../../src/dtos/mappers/company-mapper'
 import {
   Company,
@@ -28,15 +31,18 @@ export class CompanySequelizeRepository implements ICompanyRepository {
   async findById(id: string): Promise<EntityCompany> {
     const company = await Company.findByPk<CompanyInstance>(id)
     if (!company) {
-      throw new ResourceNotFound('Company', { id })
+      throw {
+        statusCode: 404,
+        message: 'Company was not found',
+      }
     }
 
     return CompanyMapper.toDomain(company)
   }
 
-  async create(companyDto: CompanyCreateDto): Promise<EntityCompany> {
+  async create(companyDomain: UnmarshalledCompany): Promise<EntityCompany> {
     try {
-      const company = CompanyMapper.toEntity(companyDto)
+      const company = CompanyMapper.toEntity(companyDomain)
       const companyModel = await Company.create(company.unmarshal())
       const entity = CompanyMapper.toDomain(companyModel)
       return entity
