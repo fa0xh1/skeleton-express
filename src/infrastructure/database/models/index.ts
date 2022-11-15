@@ -9,6 +9,7 @@ import { Role } from './role'
 import { RolePermission } from './role-permission'
 import { User } from './user'
 import { UserRole } from './user-role'
+// import { Company } from './company'
 // import { Permission } from './permission'
 // // // const sequelize = config.url
 // // //   ? new Sequelize(config.url, config)
@@ -49,3 +50,4 @@ export { Role, RoleInstance } from './role'
 export { User, UserInstance } from './user'
 export { Permission, PermissionInstance } from './permission'
 export { RolePermission } from './role-permission'
+export { Company, CompanyInstance } from './company'

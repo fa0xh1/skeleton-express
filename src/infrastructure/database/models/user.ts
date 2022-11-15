@@ -15,8 +15,8 @@ type UserCreationAttributes = Sequelize.Optional<UserAttributes, 'id'>
 interface UserInstance
   extends Sequelize.Model<UserInstance, UserCreationAttributes>,
     UserAttributes {
-  createdAt: string
-  updatedAt: string
+  created_at: string
+  updated_at: string
   comparePassword: (password: string) => Promise<boolean>
   addRole: Sequelize.BelongsToManyAddAssociationMixin<Role, string | string[]>
   removeRole: Sequelize.BelongsToManyRemoveAssociationMixin<
