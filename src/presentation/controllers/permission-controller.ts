@@ -6,11 +6,11 @@ import { PermissionMapper } from '../../../src/dtos/mappers/permission-mapper'
 
 @injectable()
 export default class PermissionController {
-  @inject(TYPES.PermissionService)
-  private _permissionService: PermissionService
-  constructor(permissionService: PermissionService) {
-    this._permissionService = permissionService
-  }
+  constructor(
+    @inject(TYPES.PermissionService)
+    private _permissionService: PermissionService,
+  ) {}
+
   public async listPermissions(req: Request, res: Response): Promise<void> {
     const permissions = await this._permissionService.findAll()
     res.status(200).send(permissions.map((val) => val))

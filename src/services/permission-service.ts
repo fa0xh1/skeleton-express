@@ -9,11 +9,11 @@ import { PermissionMapper } from '../../src/dtos/mappers/permission-mapper'
 
 @injectable()
 export class PermissionService {
-  @inject(TYPES.PermissionRepository)
-  private _repository: IPermissionRepository
-  constructor(repository: IPermissionRepository) {
-    this._repository = repository
-  }
+  constructor(
+    @inject(TYPES.PermissionRepository)
+    private _repository: IPermissionRepository,
+  ) {}
+
   public async findAll(): Promise<PermissionDto[]> {
     const permissions = await this._repository.findAll()
     const permissionDtos = permissions.map((permission) =>

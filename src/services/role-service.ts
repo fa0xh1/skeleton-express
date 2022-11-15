@@ -6,10 +6,10 @@ import { RoleMapper } from '../../src/dtos/mappers/role-mapper'
 
 @injectable()
 export class RoleService {
-  @inject(TYPES.RoleRepository) private _repository: IRoleRepository
-  constructor(repository: IRoleRepository) {
-    this._repository = repository
-  }
+  constructor(
+    @inject(TYPES.RoleRepository) private _repository: IRoleRepository,
+  ) {}
+
   public async findAll(): Promise<RoleDto[]> {
     const roles = await this._repository.findAll()
     const roleDtos = roles.map((role) => RoleMapper.domainToDto(role))

@@ -11,10 +11,11 @@ export class PermissionRoutes {
   public route = 'Permission'
   PermissionControllerInstance =
     container.get<PermissionController>(PermissionController)
-  @inject(TYPES.AuthMiddleware) private _authMiddleware: AuthMiddleware
-  constructor(authMiddleware: AuthMiddleware) {
-    this._authMiddleware = authMiddleware
-  }
+
+  constructor(
+    @inject(TYPES.AuthMiddleware) private _authMiddleware: AuthMiddleware,
+  ) {}
+
   public setRoutes(router: Router) {
     router.get(
       `/${this.route}`,

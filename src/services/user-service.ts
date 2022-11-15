@@ -6,11 +6,10 @@ import { UserMapper } from '../../src/dtos/mappers/user-mapper'
 
 @injectable()
 export class UserService {
-  @inject(TYPES.UserRepository) private _repository: IUserRepository
+  constructor(
+    @inject(TYPES.UserRepository) private _repository: IUserRepository,
+  ) {}
 
-  constructor(repository: IUserRepository) {
-    this._repository = repository
-  }
   public async findAll(): Promise<UserDto[]> {
     const users = await this._repository.findAll()
     const userDto = users.map((user) => UserMapper.domainToDto(user))

@@ -6,10 +6,8 @@ import { UserMapper } from '../../src/dtos/mappers/user-mapper'
 
 @injectable()
 export class AuthService {
-  @inject(TYPES.AuthManager) private _authManager: IAuthManager
-  constructor(authManager: IAuthManager) {
-    this._authManager = authManager
-  }
+  constructor(@inject(TYPES.AuthManager) private _authManager: IAuthManager) {}
+
   public async authentication(authDto: AuthForLoginDto): Promise<string> {
     return await this._authManager.authentication(authDto)
   }

@@ -7,10 +7,8 @@ import { TYPES } from '../../types'
 // import { Authorization } from '../../libs/authorization'
 @injectable()
 export default class AuthController {
-  @inject(TYPES.AuthService) private _authService: AuthService
-  constructor(authService: AuthService) {
-    this._authService = authService
-  }
+  constructor(@inject(TYPES.AuthService) private _authService: AuthService) {}
+
   public async login(req: Request, res: Response): Promise<void> {
     const authDto = UserMapper.requestToDto(req.body)
     const token = await this._authService.authentication(authDto)

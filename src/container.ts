@@ -8,7 +8,6 @@ import { UserRoutes } from './presentation/routes/user-routes'
 import { AccessControllRoutes } from './presentation/routes/access-controll-routes'
 import { AuthRoutes } from './presentation/routes/auth-routes'
 import { AuthMiddleware } from './presentation/middlewares/check-jwt'
-
 // Domain Service
 import { IUserRepository } from './domain/service/interface-user-repository'
 import { IRoleRepository } from './domain/service/interface-role-repository'
@@ -47,7 +46,10 @@ const container = new Container()
 container.bind<IServer>(TYPES.Server).to(Server).inSingletonScope()
 
 // Middleware And Router
-container.bind(TYPES.AuthMiddleware).to(AuthMiddleware).inSingletonScope()
+container
+  .bind<AuthMiddleware>(TYPES.AuthMiddleware)
+  .to(AuthMiddleware)
+  .inSingletonScope()
 container.bind<Routes>(Routes).toSelf().inSingletonScope()
 container.bind<UserRoutes>(UserRoutes).toSelf().inSingletonScope()
 container.bind<AuthRoutes>(AuthRoutes).toSelf().inSingletonScope()
