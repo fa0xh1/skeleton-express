@@ -8,11 +8,15 @@ import { UserRoutes } from './presentation/routes/user-routes'
 import { AccessControllRoutes } from './presentation/routes/access-controll-routes'
 import { AuthRoutes } from './presentation/routes/auth-routes'
 import { AuthMiddleware } from './presentation/middlewares/check-jwt'
+import { CompanyRoutes } from './presentation/routes/company-routes'
+
 // Domain Service
 import { IUserRepository } from './domain/service/interface-user-repository'
 import { IRoleRepository } from './domain/service/interface-role-repository'
 import { IPermissionRepository } from './domain/service/interface-permission-repository'
 import { IAuthManager } from './persistence/manager/auth-interface'
+import { ICompanyRepository } from './domain/service/interface-company-repository'
+
 // Domain Service / Infrastructur implementation
 import { UserSequelizeRepository } from './persistence/repository/user-repository'
 import { RoleSequelizeRepository } from './persistence/repository/role-repository'
@@ -24,6 +28,7 @@ import { UserService } from './services/user-service'
 import { RoleService } from './services/role-service'
 import { PermissionService } from './services/permission-service'
 import { AuthService } from './services/auth-service'
+import { CompanyService } from './services/company-service'
 
 // Controller
 import AuthController from './presentation/controllers/auth-controller'
@@ -31,6 +36,7 @@ import UserController from './presentation/controllers/user-controller'
 import AccessControllController from './presentation/controllers/access-controll-controller'
 import RoleController from './presentation/controllers/role-controller'
 import PermissionController from './presentation/controllers/permission-controller'
+import CompanyController from './presentation/controllers/permission-controller'
 
 // Bootstrap / kernel
 import { IServer, Server } from './presentation/server'
@@ -39,6 +45,7 @@ import { PermissionRoutes } from './presentation/routes/permission-routes'
 import { AccessControllService } from './services/access-controll'
 import { IAccessControll } from './domain/service/interface-access-controll'
 import { AccessControllManager } from './persistence/manager/access-controll-manager'
+import { CompanyController } from './presentation/controllers/company-controller'
 
 const container = new Container()
 
@@ -73,6 +80,7 @@ container.bind(AuthController).to(AuthController)
 container.bind(RoleController).to(RoleController)
 container.bind(PermissionController).to(PermissionController)
 container.bind(AccessControllController).to(AccessControllController)
+container.bind(CompanyController).to(CompanyController)
 
 // implement infrastructur
 
