@@ -22,6 +22,7 @@ import { UserSequelizeRepository } from './persistence/repository/user-repositor
 import { RoleSequelizeRepository } from './persistence/repository/role-repository'
 import { PermissionSequelizeRepository } from './persistence/repository/permission-repository'
 import { AuthManager } from './persistence/manager/auth-manager'
+import { CompanySequelizeRepository } from './persistence/repository/company-repository'
 
 // Service Implementation
 import { UserService } from './services/user-service'
@@ -36,7 +37,7 @@ import UserController from './presentation/controllers/user-controller'
 import AccessControllController from './presentation/controllers/access-controll-controller'
 import RoleController from './presentation/controllers/role-controller'
 import PermissionController from './presentation/controllers/permission-controller'
-import CompanyController from './presentation/controllers/permission-controller'
+import CompanyController from './presentation/controllers/company-controller'
 
 // Bootstrap / kernel
 import { IServer, Server } from './presentation/server'
@@ -57,6 +58,7 @@ container.bind<Routes>(Routes).toSelf().inSingletonScope()
 container.bind<UserRoutes>(UserRoutes).toSelf().inSingletonScope()
 container.bind<AuthRoutes>(AuthRoutes).toSelf().inSingletonScope()
 container.bind<RoleRoutes>(RoleRoutes).toSelf().inSingletonScope()
+container.bind<CompanyRoutes>(CompanyRoutes).toSelf().inSingletonScope()
 container.bind<PermissionRoutes>(PermissionRoutes).toSelf().inSingletonScope()
 container
   .bind<AccessControllRoutes>(AccessControllRoutes)
@@ -69,6 +71,7 @@ container.bind(TYPES.AuthService).to(AuthService)
 container.bind(TYPES.RoleService).to(RoleService)
 container.bind(TYPES.PermissionService).to(PermissionService)
 container.bind(TYPES.AccessControllService).to(AccessControllService)
+container.bind(TYPES.CompanyService).to(CompanyService)
 
 // Controller
 container.bind(UserController).to(UserController)
@@ -84,6 +87,9 @@ container.bind<IAuthManager>(TYPES.AuthManager).to(AuthManager)
 container
   .bind<IUserRepository>(TYPES.UserRepository)
   .to(UserSequelizeRepository)
+container
+  .bind<ICompanyRepository>(TYPES.CompanyRepository)
+  .to(CompanySequelizeRepository)
 container
   .bind<IRoleRepository>(TYPES.RoleRepository)
   .to(RoleSequelizeRepository)

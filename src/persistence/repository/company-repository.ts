@@ -9,7 +9,7 @@ import {
 } from '../../../src/infrastructure/database/models'
 import { CompanyCreateDto } from '../../../src/dtos/company-dto'
 @injectable()
-export class RoleSequelizeRepository implements ICompanyRepository {
+export class CompanySequelizeRepository implements ICompanyRepository {
   async findAll(): Promise<EntityCompany[]> {
     const companies = await (<Promise<CompanyInstance[]>>Company.findAll({
       attributes: [
