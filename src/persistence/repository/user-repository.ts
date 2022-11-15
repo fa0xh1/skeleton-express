@@ -4,7 +4,7 @@ import {
 } from '../../../src/domain/models/user'
 import { IUserRepository } from '../../domain/service/interface-user-repository'
 import { injectable } from 'inversify'
-// import { ResourceNotFound } from '../../../src/libs/errors'
+import { ResourceNotFound } from '../../../src/libs/errors'
 import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
 import { Role, User, UserInstance } from '../../infrastructure/database/models'
 
