@@ -1,12 +1,23 @@
 import { Entity } from './entity'
 
+interface Permission {
+  id: string
+  name: string
+}
+
+interface Role {
+  id: string
+  name: string
+  permissions: Permission[]
+}
+
 export interface UnmarshalledUser {
   id?: string
   username: string
   email: string
   password: string
-  roles?: Record<string, string>[]
-  permissions?: Record<string, string>[]
+  roles?: Role[]
+  permissions?: Permission[]
 }
 
 export class User extends Entity<UnmarshalledUser> {
@@ -47,11 +58,11 @@ export class User extends Entity<UnmarshalledUser> {
     return this.props.email
   }
 
-  get roles(): Record<string, string>[] | undefined {
+  get roles(): Role[] | undefined {
     return this.props.roles
   }
 
-  get permissions(): Record<string, string>[] | undefined {
+  get permissions(): Permission[] | undefined {
     return this.props.permissions
   }
 }
