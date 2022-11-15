@@ -6,10 +6,7 @@ import { User, UserInstance } from '../../infrastructure/database/models/user'
 import { Role } from '../../infrastructure/database/models/role'
 
 import { JWT_SECRET } from '../../libs/utils'
-import {
-  UnmarshalledUser,
-  User as EntityUser,
-} from '../../../src/domain/models/user'
+import { User as EntityUser } from '../../../src/domain/models/user'
 import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
 import { Permission } from '../../../src/infrastructure/database/models'
 
@@ -25,6 +22,7 @@ export class AuthManager implements IAuthManager {
       if (JWT_SECRET) {
         const secretOrKey: string = JWT_SECRET
         const compare = await user.comparePassword(authDto.password)
+        console.info(authDto)
         if (compare) {
           return jwt.sign(
             {

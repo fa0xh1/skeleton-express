@@ -5,5 +5,5 @@ export interface IUserRepository {
   findById(id: string): Promise<User>
   create(user: User): Promise<User>
   update(id: string, user: UnmarshalledUser): Promise<User>
-  // delete(id: string): Promise<boolean>
+  delete(id: string): Promise<boolean>
 }

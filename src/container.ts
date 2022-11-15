@@ -9,6 +9,7 @@ import { AccessControllRoutes } from './presentation/routes/access-controll-rout
 import { AuthRoutes } from './presentation/routes/auth-routes'
 import { AuthMiddleware } from './presentation/middlewares/check-jwt'
 import { CompanyRoutes } from './presentation/routes/company-routes'
+import { PermissionMiddleware } from './presentation/middlewares/check-permission'
 
 // Domain Service
 import { IUserRepository } from './domain/service/interface-user-repository'
@@ -56,6 +57,10 @@ container.bind<IServer>(TYPES.Server).to(Server).inSingletonScope()
 container
   .bind<AuthMiddleware>(TYPES.AuthMiddleware)
   .to(AuthMiddleware)
+  .inSingletonScope()
+container
+  .bind<PermissionMiddleware>(TYPES.PermissionMiddleware)
+  .to(PermissionMiddleware)
   .inSingletonScope()
 container.bind<Routes>(Routes).toSelf().inSingletonScope()
 container.bind<UserRoutes>(UserRoutes).toSelf().inSingletonScope()

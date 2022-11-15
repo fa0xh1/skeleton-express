@@ -1,7 +1,18 @@
+interface Permission {
+  id: string
+  name: string
+}
+
+interface Role {
+  id: string
+  name: string
+  permissions: Permission[]
+}
+
 export interface UserSession {
   id: string
-  role?: Record<string, string>[]
-  permission?: Record<string, string>[]
+  role?: Role[]
+  permission?: Permission[]
 }
 export interface IAdminPrincipal {
   __admin: 'admin'
@@ -28,19 +39,19 @@ export class Authorization {
     }
   }
 
-  public checkRole(name: string) {
-    return this.role?.find((item) => item.name == name)
-  }
+  // public checkRole(name: string) {
+  //   return this.role?.find((item) => item.name == name)
+  // }
 
   get id(): string {
     return this.props.id
   }
 
-  get role(): Record<string, string>[] | undefined {
+  get role(): Role[] | undefined {
     return this.props.role
   }
 
-  get permission(): Record<string, string>[] | undefined {
+  get permission(): Permission[] | undefined {
     return this.props.permission
   }
 }
