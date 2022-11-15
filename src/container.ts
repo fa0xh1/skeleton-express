@@ -45,7 +45,6 @@ import { PermissionRoutes } from './presentation/routes/permission-routes'
 import { AccessControllService } from './services/access-controll'
 import { IAccessControll } from './domain/service/interface-access-controll'
 import { AccessControllManager } from './persistence/manager/access-controll-manager'
-import { CompanyController } from './presentation/controllers/company-controller'
 
 const container = new Container()
 
