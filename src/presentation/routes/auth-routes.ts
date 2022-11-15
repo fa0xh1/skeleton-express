@@ -9,8 +9,10 @@ import { TYPES } from '../../../src/types'
 export class AuthRoutes {
   public route = 'Auth'
   AuthControllerInstance = container.get<AuthController>(AuthController)
-  @inject(TYPES.AuthMiddleware) private _authMiddleware!: AuthMiddleware
-
+  @inject(TYPES.AuthMiddleware) private _authMiddleware: AuthMiddleware
+  constructor(authMiddleware: AuthMiddleware) {
+    this._authMiddleware = authMiddleware
+  }
   public setRoutes(router: Router) {
     router.post(
       `/${this.route}/login`,

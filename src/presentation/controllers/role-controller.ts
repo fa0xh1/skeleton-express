@@ -6,7 +6,10 @@ import { RoleMapper } from '../../../src/dtos/mappers/role-mapper'
 
 @injectable()
 export default class RoleController {
-  @inject(TYPES.RoleService) private _roleService!: RoleService
+  @inject(TYPES.RoleService) private _roleService: RoleService
+  constructor(roleService: RoleService) {
+    this._roleService = roleService
+  }
   public async listRoles(req: Request, res: Response): Promise<void> {
     const roles = await this._roleService.findAll()
     res.status(200).send(roles.map((val) => val))

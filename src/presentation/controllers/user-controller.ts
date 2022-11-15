@@ -3,17 +3,19 @@ import { inject, injectable } from 'inversify'
 import { TYPES } from '../../types'
 import { UserService } from '../../../src/services/user-service'
 import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
-import { Authorization, UserSession } from '../../../src/libs/authorization'
-import { IAdminPrincipal } from '../../../src/libs/authorization'
+// import { Authorization } from '../../../src/libs/authorization'
 
 @injectable()
 export default class UserController {
-  @inject(TYPES.UserService) private _userService!: UserService
+  @inject(TYPES.UserService) private _userService: UserService
+
+  constructor(userService: UserService) {
+    this._userService = userService
+  }
 
   public async listUsers(req: Request, res: Response): Promise<void> {
-    const userSession: Authorization = await res.locals.Authorization
-
-    const users = await this._userService.findAll(userSession.authorizeAdmin())
+    // const userSession: Authorization = await res.locals.Authorization
+    const users = await this._userService.findAll()
     res.status(200).send(users.map((val) => val))
   }
 

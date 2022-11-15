@@ -9,8 +9,10 @@ import { TYPES } from '../../types'
 @injectable()
 export default class AccessControllController {
   @inject(TYPES.AccessControllService)
-  private _accessControll!: AccessControllService
-
+  private _accessControll: AccessControllService
+  constructor(accessControll: AccessControllService) {
+    this._accessControll = accessControll
+  }
   public async addRoleUser(req: Request, res: Response): Promise<void> {
     const userRoleCreateDto = UserHasRoleMapper.requestToDto(req.body)
     const accessControll = await this._accessControll.addRoleUser(

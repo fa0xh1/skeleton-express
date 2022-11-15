@@ -10,8 +10,10 @@ import { RolePermissionCreateDto } from 'src/dtos/permission-dto'
 
 @injectable()
 export class AccessControllService {
-  @inject(TYPES.AccessControllManager) private _accessControll!: IAccessControll
-
+  @inject(TYPES.AccessControllManager) private _accessControll: IAccessControll
+  constructor(accessControll: IAccessControll) {
+    this._accessControll = accessControll
+  }
   public async addRoleUser(_userHasRole: UserRoleCreateDto): Promise<string> {
     const userDomain = UserHasRoleMapper.dtoToDomain(_userHasRole)
     const role = await this._accessControll.addRoleToUser(userDomain)

@@ -1,4 +1,4 @@
-import { AuthForLoginDto, UserCreateDto, UserDto } from '../user-dto'
+import { UserCreateDto, UserDto } from '../user-dto'
 import { UnmarshalledUser, User } from '../../domain/models/user'
 // import { UserSession } from '../../libs/authorization'
 

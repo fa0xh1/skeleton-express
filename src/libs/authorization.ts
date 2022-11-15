@@ -32,15 +32,6 @@ export class Authorization {
     return this.role?.find((item) => item.name == name)
   }
 
-  public authorizeAdmin(): IAdminPrincipal {
-    const role = this.role?.find((item) => item.name == 'admin')
-    const admin: IAdminPrincipal = {
-      __admin: 'admin',
-      id: this.props.id,
-    }
-    return admin
-  }
-
   get id(): string {
     return this.props.id
   }
