@@ -4,7 +4,7 @@ import {
 } from '../../../src/domain/models/user'
 import { IUserRepository } from '../../domain/service/interface-user-repository'
 import { injectable } from 'inversify'
-// import { ResourceNotFound } from '../../../src/libs/errors'
+import { AppError, HttpCode } from '../../../src/libs/exceptions/app-error'
 import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
 import { Role, User, UserInstance } from '../../infrastructure/database/models'
 
@@ -22,12 +22,11 @@ export class UserSequelizeRepository implements IUserRepository {
       include: [Role],
     })
     if (!user) {
-      throw {
-        statusCode: 404,
-        message: 'User was not found',
-      }
+      throw new AppError({
+        statusCode: HttpCode.NOT_FOUND,
+        description: 'User was not found',
+      })
     }
-    // console.log(user.toJSON())
     return UserMapper.toDomain(user)
   }
 
@@ -38,10 +37,11 @@ export class UserSequelizeRepository implements IUserRepository {
       const entity = UserMapper.toDomain(userModel)
       return entity
     } catch (e) {
-      throw {
-        statusCode: 400,
-        message: e,
-      }
+      throw new AppError({
+        statusCode: HttpCode.BAD_REQUEST,
+        description: 'Failed to create user',
+        error: e,
+      })
     }
   }
 

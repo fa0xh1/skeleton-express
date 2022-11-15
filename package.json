@@ -17,7 +17,9 @@
     "cuid": "^2.1.8",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
     "http-errors": "^2.0.0",
+    "http-terminator": "^3.2.0",
     "inversify": "^6.0.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
@@ -28,7 +30,8 @@
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.24.0",
     "sequelize-auto": "^0.8.8",
-    "sequelize-typescript": "^2.1.5"
+    "sequelize-typescript": "^2.1.5",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
