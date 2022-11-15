@@ -6,6 +6,7 @@ const TYPES = {
 
   HTTPRouter: Symbol.for('HTTPRouter'),
   AuthMiddleware: Symbol.for('AuthMiddleware'),
+  PermissionMiddleware: Symbol.for('PermissionMiddleware'),
 
   // Impelementation Domain Service
   AuthManager: Symbol.for('AuthManager'),

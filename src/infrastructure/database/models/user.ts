@@ -40,12 +40,6 @@ User.beforeSave(async (user: UserInstance) => {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10))
   }
 })
-User.beforeUpdate(async (user: UserInstance) => {
-  // console.info('update')
-  if (user.password) {
-    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10))
-  }
-})
 
 User.prototype.comparePassword = async function (
   password: string,
