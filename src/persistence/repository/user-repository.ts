@@ -59,4 +59,16 @@ export class UserSequelizeRepository implements IUserRepository {
 
     return entity
   }
+
+  async delete(id: string): Promise<boolean> {
+    const user = await User.findByPk(id)
+    if (!user) {
+      throw {
+        statusCode: 404,
+        message: 'Your fucking user was not found',
+      }
+    }
+    await user.destroy()
+    return true
+  }
 }
