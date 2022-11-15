@@ -30,9 +30,20 @@ const User = sequelize.define<UserInstance, UnmarshalledUser>('user', {
     type: Sequelize.STRING,
     primaryKey: true,
   },
-  email: Sequelize.STRING,
-  password: Sequelize.STRING,
-  username: Sequelize.STRING,
+  email: {
+    unique: true,
+    allowNull: false,
+    type: Sequelize.STRING,
+  },
+  password: {
+    allowNull: false,
+    type: Sequelize.STRING,
+  },
+  username: {
+    unique: true,
+    allowNull: false,
+    type: Sequelize.STRING,
+  },
 })
 
 User.beforeSave(async (user: UserInstance) => {

@@ -34,7 +34,7 @@ const Role = sequelize.define<RoleInstance>('role', {
     unique: true,
   },
   name: {
-    allowNull: true,
+    allowNull: false,
     type: Sequelize.DataTypes.STRING,
   },
   description: {

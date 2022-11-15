@@ -1,12 +1,12 @@
-export interface PermissionCreateDto {
+interface PermissionBaseDto {
   name: string
   description: string
 }
+export type PermissionCreateDto = PermissionBaseDto
+export type PermissionUpdateDto = PermissionBaseDto
 
-export interface PermissionDto {
+export interface PermissionDto extends PermissionBaseDto {
   id: string
-  name: string
-  description: string
 }
 
 export interface RolePermissionCreateDto {

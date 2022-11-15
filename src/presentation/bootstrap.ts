@@ -1,19 +1,21 @@
 import * as bodyParser from 'body-parser'
 import express, { Request, Response, NextFunction } from 'express'
 import { Routes } from './routes/routes'
+import { AppError } from '../../src/libs/exceptions/app-error'
+import { errorHandler } from '../../src/libs/exceptions/error-handler'
+import { logger } from '../../src/libs/logger'
+// class AppError extends Error {
+//   statusCode: number
 
-class AppError extends Error {
-  statusCode: number
+//   constructor(statusCode: number, message: string) {
+//     super(message)
 
-  constructor(statusCode: number, message: string) {
-    super(message)
-
-    Object.setPrototypeOf(this, new.target.prototype)
-    this.name = Error.name
-    this.statusCode = statusCode
-    Error.captureStackTrace(this)
-  }
-}
+//     Object.setPrototypeOf(this, new.target.prototype)
+//     this.name = Error.name
+//     this.statusCode = statusCode
+//     Error.captureStackTrace(this)
+//   }
+// }
 export class Bootstrap {
   public app = express()
 
@@ -41,12 +43,13 @@ export class Bootstrap {
 
   private middlewareError(): void {
     const errorLogger = (
-      error: Error,
+      error: AppError,
       request: Request,
       response: Response,
       next: NextFunction,
     ) => {
-      console.log(`error ${error.message}`)
+      logger.error(error.error.toJson())
+      // console.log(`error ${error.error.toJson()}`)
       next(error) // calling next middleware
     }
 
@@ -56,10 +59,7 @@ export class Bootstrap {
       response: Response,
       next: NextFunction,
     ) => {
-      response.header('Content-Type', 'application/json')
-
-      const status = error.statusCode || 400
-      response.status(status).send(error)
+      errorHandler.handleError(error, response)
     }
 
     const invalidPathHandler = (
