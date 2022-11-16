@@ -19,7 +19,6 @@ export default class AuthController {
   }
 
   public async me(req: Request, res: Response): Promise<void> {
-    // await res.locals.checkRole('kontol')
     res.send(await res.locals.Authorization)
   }
 }

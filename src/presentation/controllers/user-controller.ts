@@ -10,7 +10,6 @@ export default class UserController {
   constructor(@inject(TYPES.UserService) private _userService: UserService) {}
 
   public async listUsers(req: Request, res: Response): Promise<Response> {
-    // const userSession: Authorization = await res.locals.Authorization
     const users = await this._userService.findAll()
     return res.status(200).send(users.map((val) => val))
   }
