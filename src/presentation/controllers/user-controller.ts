@@ -4,7 +4,10 @@ import { TYPES } from '../../types'
 import { UserService } from '../../services/user-service'
 import { UserMapper } from '../../dtos/mappers/user-mapper'
 // import { Authorization } from '@/libs/authorization'
-import { userCreateScheme } from '../validation/user-validation'
+import {
+  userCreateScheme,
+  userUpdateScheme,
+} from '../validation/user-validation'
 import { HttpCode, AppError } from '../../libs/exceptions/app-error'
 @injectable()
 export default class UserController {
@@ -30,14 +33,21 @@ export default class UserController {
         data: parseBody.error.flatten(),
       })
     }
-    // console.log(parseBody)
-    const user = UserMapper.requestToDto(req.body)
+    const user = UserMapper.requestToDto(parseBody.data)
     const userService = await this._userService.create(user)
     return res.status(200).send(userService)
   }
 
   public async updateUser(req: Request, res: Response): Promise<Response> {
-    const user = UserMapper.requestToDto(req.body)
+    const parseBody = userUpdateScheme.safeParse(req.body)
+    if (!parseBody.success) {
+      throw new AppError({
+        statusCode: HttpCode.BAD_REQUEST,
+        description: 'Request validation error',
+        data: parseBody.error.flatten(),
+      })
+    }
+    const user = UserMapper.requestToDto(parseBody.data)
     const userService = await this._userService.update(req.params.id, user)
     return res.status(200).send(userService)
   }

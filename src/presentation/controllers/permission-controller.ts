@@ -3,6 +3,11 @@ import { inject, injectable } from 'inversify'
 import { TYPES } from '../../types'
 import { PermissionService } from '../../services/permission-service'
 import { PermissionMapper } from '../../dtos/mappers/permission-mapper'
+import {
+  permissionCreateScheme,
+  permissionUpdateScheme,
+} from '../../presentation/validation/permission-validation'
+import { AppError, HttpCode } from '../../libs/exceptions/app-error'
 
 @injectable()
 export default class PermissionController {
@@ -20,12 +25,28 @@ export default class PermissionController {
     res.status(200).send(permission)
   }
   public async createPermission(req: Request, res: Response): Promise<void> {
-    const permission = PermissionMapper.requestToDto(req.body)
+    const parseBody = permissionCreateScheme.safeParse(req.body)
+    if (!parseBody.success) {
+      throw new AppError({
+        statusCode: HttpCode.BAD_REQUEST,
+        description: 'Request validation error',
+        data: parseBody.error.flatten(),
+      })
+    }
+    const permission = PermissionMapper.requestToDto(parseBody.data)
     const permissionService = await this._permissionService.create(permission)
     res.status(200).send(permissionService)
   }
   public async updatePermission(req: Request, res: Response): Promise<void> {
-    const Permission = PermissionMapper.requestToDto(req.body)
+    const parseBody = permissionUpdateScheme.safeParse(req.body)
+    if (!parseBody.success) {
+      throw new AppError({
+        statusCode: HttpCode.BAD_REQUEST,
+        description: 'Request validation error',
+        data: parseBody.error.flatten(),
+      })
+    }
+    const Permission = PermissionMapper.requestToDto(parseBody.data)
     const PermissionService = await this._permissionService.update(
       req.params.id,
       Permission,
