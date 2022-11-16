@@ -71,4 +71,16 @@ export class CompanySequelizeRepository implements ICompanyRepository {
 
     return entity
   }
+
+  async delete(id: string): Promise<boolean> {
+    const company = await Company.findByPk(id)
+    if (!company) {
+      throw {
+        statusCode: 404,
+        message: 'Your company was not found',
+      }
+    }
+    await company.destroy()
+    return true
+  }
 }

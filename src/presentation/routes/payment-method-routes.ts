@@ -2,38 +2,39 @@ import { Router } from 'express'
 import { inject, injectable } from 'inversify'
 import asyncWrap from '../../../src/libs/asyncWrapper'
 import { container } from '../../../src/container'
-import CompanyController from '../controllers/company-controller'
+import PaymentMethodController from '../controllers/payment-method-controller'
 import { TYPES } from '../../types'
 import { AuthMiddleware } from '../middlewares/check-jwt'
 @injectable()
-export class CompanyRoutes {
-  public route = 'Company'
-  CompanyControllerInstance =
-    container.get<CompanyController>(CompanyController)
+export class PaymentMethodRoutes {
+  public route = 'payment/method'
+  PaymentMethodControllerInstance = container.get<PaymentMethodController>(
+    PaymentMethodController,
+  )
   @inject(TYPES.AuthMiddleware) private _authMiddleware!: AuthMiddleware
   public setRoutes(router: Router) {
     router.get(
       `/${this.route}`,
       [this._authMiddleware.checkJwt],
       asyncWrap(
-        this.CompanyControllerInstance.listCompanies.bind(
-          this.CompanyControllerInstance,
+        this.PaymentMethodControllerInstance.listPaymentMethods.bind(
+          this.PaymentMethodControllerInstance,
         ),
       ),
     )
     router.get(
       `/${this.route}/:id`,
       asyncWrap(
-        this.CompanyControllerInstance.findCompanyById.bind(
-          this.CompanyControllerInstance,
+        this.PaymentMethodControllerInstance.findPaymentMethodById.bind(
+          this.PaymentMethodControllerInstance,
         ),
       ),
     )
     router.put(
       `/${this.route}/:id`,
       asyncWrap(
-        this.CompanyControllerInstance.updateCompany.bind(
-          this.CompanyControllerInstance,
+        this.PaymentMethodControllerInstance.updatePaymentMethod.bind(
+          this.PaymentMethodControllerInstance,
         ),
       ),
     )
@@ -41,8 +42,8 @@ export class CompanyRoutes {
     router.post(
       `/${this.route}`,
       asyncWrap(
-        this.CompanyControllerInstance.createCompany.bind(
-          this.CompanyControllerInstance,
+        this.PaymentMethodControllerInstance.createPaymentMethod.bind(
+          this.PaymentMethodControllerInstance,
         ),
       ),
     )
@@ -51,8 +52,8 @@ export class CompanyRoutes {
       `/${this.route}/:id`,
       [this._authMiddleware.checkJwt],
       asyncWrap(
-        this.CompanyControllerInstance.deleteCompany.bind(
-          this.CompanyControllerInstance,
+        this.PaymentMethodControllerInstance.deletePaymentMethod.bind(
+          this.PaymentMethodControllerInstance,
         ),
       ),
     )

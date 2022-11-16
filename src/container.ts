@@ -9,6 +9,8 @@ import { AccessControllRoutes } from './presentation/routes/access-controll-rout
 import { AuthRoutes } from './presentation/routes/auth-routes'
 import { AuthMiddleware } from './presentation/middlewares/check-jwt'
 import { CompanyRoutes } from './presentation/routes/company-routes'
+import { BankRoutes } from './presentation/routes/bank-routes'
+import { PaymentMethodRoutes } from './presentation/routes/payment-method-routes'
 import { PermissionMiddleware } from './presentation/middlewares/check-permission'
 
 // Domain Service
@@ -17,6 +19,8 @@ import { IRoleRepository } from './domain/service/interface-role-repository'
 import { IPermissionRepository } from './domain/service/interface-permission-repository'
 import { IAuthManager } from './persistence/manager/auth-interface'
 import { ICompanyRepository } from './domain/service/interface-company-repository'
+import { IBankRepository } from './domain/service/interface-bank-repository'
+import { IPaymentMethodRepository } from './domain/service/interface-payment-method-repository'
 
 // Domain Service / Infrastructur implementation
 import { UserSequelizeRepository } from './persistence/repository/user-repository'
@@ -24,6 +28,8 @@ import { RoleSequelizeRepository } from './persistence/repository/role-repositor
 import { PermissionSequelizeRepository } from './persistence/repository/permission-repository'
 import { AuthManager } from './persistence/manager/auth-manager'
 import { CompanySequelizeRepository } from './persistence/repository/company-repository'
+import { BankSequelizeRepository } from './persistence/repository/bank-repository'
+import { PaymentMethodSequelizeRepository } from './persistence/repository/payment-method-repository'
 
 // Service Implementation
 import { UserService } from './services/user-service'
@@ -31,6 +37,8 @@ import { RoleService } from './services/role-service'
 import { PermissionService } from './services/permission-service'
 import { AuthService } from './services/auth-service'
 import { CompanyService } from './services/company-service'
+import { BankService } from './services/bank-service'
+import { PaymentMethodService } from './services/payment-method-service'
 
 // Controller
 import AuthController from './presentation/controllers/auth-controller'
@@ -39,6 +47,8 @@ import AccessControllController from './presentation/controllers/access-controll
 import RoleController from './presentation/controllers/role-controller'
 import PermissionController from './presentation/controllers/permission-controller'
 import CompanyController from './presentation/controllers/company-controller'
+import BankController from './presentation/controllers/bank-controller'
+import PaymentMethodController from './presentation/controllers/payment-method-controller'
 
 // Bootstrap / kernel
 import { IServer, Server } from './presentation/server'
@@ -68,6 +78,11 @@ container.bind<AuthRoutes>(AuthRoutes).toSelf().inSingletonScope()
 container.bind<RoleRoutes>(RoleRoutes).toSelf().inSingletonScope()
 container.bind<CompanyRoutes>(CompanyRoutes).toSelf().inSingletonScope()
 container.bind<PermissionRoutes>(PermissionRoutes).toSelf().inSingletonScope()
+container.bind<BankRoutes>(BankRoutes).toSelf().inSingletonScope()
+container
+  .bind<PaymentMethodRoutes>(PaymentMethodRoutes)
+  .toSelf()
+  .inSingletonScope()
 container
   .bind<AccessControllRoutes>(AccessControllRoutes)
   .toSelf()
@@ -80,6 +95,8 @@ container.bind(TYPES.RoleService).to(RoleService)
 container.bind(TYPES.PermissionService).to(PermissionService)
 container.bind(TYPES.AccessControllService).to(AccessControllService)
 container.bind(TYPES.CompanyService).to(CompanyService)
+container.bind(TYPES.BankService).to(BankService)
+container.bind(TYPES.PaymentMethodService).to(PaymentMethodService)
 
 // Controller
 container.bind(UserController).to(UserController)
@@ -88,6 +105,8 @@ container.bind(RoleController).to(RoleController)
 container.bind(PermissionController).to(PermissionController)
 container.bind(AccessControllController).to(AccessControllController)
 container.bind(CompanyController).to(CompanyController)
+container.bind(BankController).to(BankController)
+container.bind(PaymentMethodController).to(PaymentMethodController)
 
 // implement infrastructur
 
@@ -98,6 +117,12 @@ container
 container
   .bind<ICompanyRepository>(TYPES.CompanyRepository)
   .to(CompanySequelizeRepository)
+container
+  .bind<IBankRepository>(TYPES.BankRepository)
+  .to(BankSequelizeRepository)
+container
+  .bind<IPaymentMethodRepository>(TYPES.PaymentMethodRepository)
+  .to(PaymentMethodSequelizeRepository)
 container
   .bind<IRoleRepository>(TYPES.RoleRepository)
   .to(RoleSequelizeRepository)

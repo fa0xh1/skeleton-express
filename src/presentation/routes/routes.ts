@@ -6,6 +6,8 @@ import { AccessControllRoutes } from './access-controll-routes'
 import { RoleRoutes } from './role-routes'
 import { PermissionRoutes } from './permission-routes'
 import { CompanyRoutes } from './company-routes'
+import { BankRoutes } from './bank-routes'
+import { PaymentMethodRoutes } from './payment-method-routes'
 
 @injectable()
 export class Routes {
@@ -16,6 +18,8 @@ export class Routes {
     private roleRoutes: RoleRoutes,
     private permissionRoutes: PermissionRoutes,
     private companyRoutes: CompanyRoutes,
+    private bankRoutes: BankRoutes,
+    private paymentMethodRoutes: PaymentMethodRoutes,
   ) {}
 
   public setRoutes(router: Router) {
@@ -25,5 +29,7 @@ export class Routes {
     this.permissionRoutes.setRoutes(router)
     this.accessControllRoutes.setRoutes(router)
     this.companyRoutes.setRoutes(router)
+    this.bankRoutes.setRoutes(router)
+    this.paymentMethodRoutes.setRoutes(router)
   }
 }

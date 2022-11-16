@@ -40,4 +40,9 @@ export class CompanyService {
     const companyDto = CompanyMapper.domainToDto(company)
     return companyDto
   }
+
+  public async delete(id: string): Promise<boolean> {
+    const company = await this._repository.delete(id)
+    return company
+  }
 }

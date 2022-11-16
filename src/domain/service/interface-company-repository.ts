@@ -5,5 +5,5 @@ export interface ICompanyRepository {
   findById(id: string): Promise<Company>
   create(company: UnmarshalledCompany): Promise<Company>
   update(id: string, company: UnmarshalledCompany): Promise<Company>
-  // destroy(id: string): Promise<boolean>
+  delete(id: string): Promise<boolean>
 }

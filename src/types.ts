@@ -15,6 +15,8 @@ const TYPES = {
   RoleRepository: Symbol.for('RoleRepository'),
   PermissionRepository: Symbol.for('PermissionRepository'),
   CompanyRepository: Symbol.for('CompanyRepository'),
+  BankRepository: Symbol.for('BankRepository'),
+  PaymentMethodRepository: Symbol.for('PaymentMethodRepository'),
 
   // Service Layer
   AuthService: Symbol.for('AuthService'),
@@ -23,6 +25,8 @@ const TYPES = {
   PermissionService: Symbol.for('PermissionService'),
   AccessControllService: Symbol.for('AccessControllService'),
   CompanyService: Symbol.for('CompanyService'),
+  BankService: Symbol.for('BankService'),
+  PaymentMethodService: Symbol.for('PaymentMethodService'),
 
   // UserRepository: Symbol.for('UserRepository'),
 }

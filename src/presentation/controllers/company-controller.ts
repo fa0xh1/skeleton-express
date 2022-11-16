@@ -32,4 +32,9 @@ export default class CompanyController {
     )
     res.status(200).send(companyService)
   }
+
+  public async deleteCompany(req: Request, res: Response): Promise<Response> {
+    const company = await this._companyService.delete(req.params.id)
+    return res.status(200).send(company)
+  }
 }
