@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from 'express'
 import * as jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../../../src/libs/utils'
+import { JWT_SECRET } from '../../libs/utils'
 import { injectable, inject } from 'inversify'
-import { AuthService } from '../../../src/services/auth-service'
-import { TYPES } from '../../../src/types'
-import { AuthDtoMapper } from '../../../src/dtos/mappers/auth-mapper'
-import { Authorization, UserSession } from '../../../src/libs/authorization'
-import { UserDto } from '../../../src/dtos/user-dto'
+import { AuthService } from '../../services/auth-service'
+import { TYPES } from '../../types'
+import { AuthDtoMapper } from '../../dtos/mappers/auth-mapper'
+import { Authorization, UserSession } from '../../libs/authorization'
+import { UserDto } from '../../dtos/user-dto'
 
 interface authUser {
   id: string

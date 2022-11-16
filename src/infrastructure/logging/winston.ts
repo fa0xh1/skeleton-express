@@ -1,6 +1,11 @@
 import { createLogger, transports, format } from 'winston'
 export const logger = createLogger({
-  transports: [new transports.Console()],
+  transports: [
+    new transports.File({
+      dirname: 'logs',
+      filename: 'skeleton-general.log',
+    }),
+  ],
   format: format.combine(
     format.colorize(),
     format.timestamp(),
@@ -9,5 +14,3 @@ export const logger = createLogger({
     }),
   ),
 })
-
-// logger.info('Hello world!')

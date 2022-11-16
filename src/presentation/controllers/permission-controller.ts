@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../../types'
-import { PermissionService } from '../../../src/services/permission-service'
-import { PermissionMapper } from '../../../src/dtos/mappers/permission-mapper'
+import { PermissionService } from '../../services/permission-service'
+import { PermissionMapper } from '../../dtos/mappers/permission-mapper'
 
 @injectable()
 export default class PermissionController {

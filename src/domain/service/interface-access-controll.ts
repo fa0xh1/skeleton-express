@@ -1,5 +1,5 @@
-import { UnmarshalledRoleHasPermission } from 'src/domain/models/role-permission'
-import { UnmarshalledUserHasRole } from '../../../src/domain/models/user-role'
+import { UnmarshalledRoleHasPermission } from '../../domain/models/role-permission'
+import { UnmarshalledUserHasRole } from '../../domain/models/user-role'
 
 export interface IAccessControll {
   addRoleToUser(_userHasRole: UnmarshalledUserHasRole): Promise<string>

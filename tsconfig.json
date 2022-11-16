@@ -11,8 +11,12 @@
             "reflect-metadata"
         ],
         "outDir": "build",
-        "rootDir": "src",
-        "baseUrl": ".",
+        "baseUrl": "src",
+        // "paths": {
+        //     "@/*": [
+        //         "./src/*"
+        //     ]
+        // },
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "strict": true

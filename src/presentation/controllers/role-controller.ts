@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../../types'
-import { RoleService } from '../../../src/services/role-service'
-import { RoleMapper } from '../../../src/dtos/mappers/role-mapper'
+import { RoleService } from '../../services/role-service'
+import { RoleMapper } from '../../dtos/mappers/role-mapper'
 
 @injectable()
 export default class RoleController {

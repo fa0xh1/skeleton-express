@@ -1,10 +1,10 @@
 import { Router } from 'express'
 import { injectable, inject } from 'inversify'
-import asyncWrap from '../../../src/libs/asyncWrapper'
-import { container } from '../../../src/container'
+import asyncWrap from '../../libs/asyncWrapper'
+import { container } from '../../container'
 import AuthController from '../controllers/auth-controller'
 import { AuthMiddleware } from '../middlewares/check-jwt'
-import { TYPES } from '../../../src/types'
+import { TYPES } from '../../types'
 @injectable()
 export class AuthRoutes {
   public route = 'Auth'

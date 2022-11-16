@@ -1,5 +1,5 @@
 import { RoleCreateDto, RoleDto } from '../role-dto'
-import { UnmarshalledRole, Role } from '../../../src/domain/models/role'
+import { UnmarshalledRole, Role } from '../../domain/models/role'
 export class RoleMapper {
   public static requestToDto(raw: roleRequest): RoleCreateDto {
     return {

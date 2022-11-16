@@ -1,14 +1,13 @@
 import { UserRoleCreateDto, UserRoleDto } from '../role-dto'
 import { RolePermissionCreateDto, RolePermissionDto } from '../permission-dto'
-// import { UnmarshalledRole, Role } from '../../../src/domain/models/role'
 import {
   UnmarshalledUserHasRole,
   UserHasRole,
-} from '../../../src/domain/models/user-role'
+} from '../../domain/models/user-role'
 import {
   RoleHasPermission,
   UnmarshalledRoleHasPermission,
-} from '../../../src/domain/models/role-permission'
+} from '../../domain/models/role-permission'
 
 export class UserHasRoleMapper {
   public static requestToDto(raw: userRoleRequest): UserRoleCreateDto {

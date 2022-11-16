@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize'
-import { DB_CONFIG } from '../../../src/libs/utils'
+import { DB_CONFIG } from '../../libs/utils'
 // const env = process.env.NODE_ENV || 'development'
 // // eslint-disable-next-line @typescript-eslint/no-var-requires
 // const config = require(__dirname + '/../../config.js')[env]

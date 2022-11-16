@@ -1,8 +1,8 @@
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../types'
-import { IUserRepository } from '../../src/domain/service/interface-user-repository'
-import { UserCreateDto, UserUpdateDto, UserDto } from '../../src/dtos/user-dto'
-import { UserMapper } from '../../src/dtos/mappers/user-mapper'
+import { IUserRepository } from '../domain/service/interface-user-repository'
+import { UserCreateDto, UserUpdateDto, UserDto } from '../dtos/user-dto'
+import { UserMapper } from '../dtos/mappers/user-mapper'
 
 @injectable()
 export class UserService {
