@@ -1,8 +1,8 @@
 import 'express-async-errors'
 import { Response } from 'express'
 import { AppError, HttpCode } from './app-error'
-// import { exitHandler } from '../ExitHandler'
 import { exitHandler } from '../exit-handler'
+
 class ErrorHandler {
   public handleError(error: Error | AppError, response?: Response): void {
     if (this.isTrustedError(error) && response) {
@@ -15,6 +15,8 @@ class ErrorHandler {
   public isTrustedError(error: Error): boolean {
     if (error instanceof AppError) {
       return error.isOperational
+    } else if (error instanceof SyntaxError) {
+      return true
     }
 
     return false
@@ -25,7 +27,7 @@ class ErrorHandler {
       statusCode: error.statusCode,
       message: error.message,
       data: error.data,
-      // e: error.error,
+      e: error.error,
     })
   }
 

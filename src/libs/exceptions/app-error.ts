@@ -10,7 +10,7 @@ export enum HttpCode {
 interface AppErrorArgs {
   name?: string
   statusCode: HttpCode
-  data?: Record<string, string>[]
+  data?: any
   description: string
   error?: any
   isOperational?: boolean
@@ -20,7 +20,7 @@ export class AppError extends Error {
   public readonly name: string
   public readonly statusCode: HttpCode
   public readonly isOperational: boolean = true
-  public readonly data?: Record<string, string>[]
+  public readonly data?: any[]
   public readonly error?: any
   constructor(args: AppErrorArgs) {
     super(args.description)

@@ -1,12 +1,12 @@
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../types'
 import { IAccessControll } from '../domain/service/interface-access-controll'
-import { UserRoleCreateDto } from '../../src/dtos/role-dto'
+import { UserRoleCreateDto } from '../dtos/role-dto'
 import {
   RoleHasPermissionMapper,
   UserHasRoleMapper,
-} from '../../src/dtos/mappers/access-controll-mapper'
-import { RolePermissionCreateDto } from 'src/dtos/permission-dto'
+} from '../dtos/mappers/access-controll-mapper'
+import { RolePermissionCreateDto } from '../dtos/permission-dto'
 
 @injectable()
 export class AccessControllService {

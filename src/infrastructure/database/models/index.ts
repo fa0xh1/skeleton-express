@@ -1,26 +1,8 @@
-// import { Sequelize } from 'sequelize'
-// import { DB_CONFIG } from '../../../../src/libs/utils'
-// // const env = process.env.NODE_ENV || 'development'
-// // // eslint-disable-next-line @typescript-eslint/no-var-requires
-// // const config = require(__dirname + '/../../config.js')[env]
-
 import { Permission } from './permission'
 import { Role } from './role'
 import { RolePermission } from './role-permission'
 import { User } from './user'
 import { UserRole } from './user-role'
-// import { Company } from './company'
-// import { Permission } from './permission'
-// // // const sequelize = config.url
-// // //   ? new Sequelize(config.url, config)
-// // //   : new Sequelize(config.database, config.username, config.password, config)
-// // const { db_name, db_user, db_password } = DB_CONFIG
-// // const sequelize = new Sequelize(db_name, db_user, db_password, {
-// //   dialect: 'mysql',
-// //   port: 3306,
-// // })
-
-// export { Sequelize, sequelize }
 
 User.belongsToMany(Role, {
   through: UserRole,

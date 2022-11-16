@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { injectable } from 'inversify'
-import { Authorization } from '../../../src/libs/authorization'
+import { Authorization } from '../../libs/authorization'
 @injectable()
 export class PermissionMiddleware {
   checkPermission = (permissions: Array<string>) => {

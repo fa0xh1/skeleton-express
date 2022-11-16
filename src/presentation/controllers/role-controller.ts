@@ -1,8 +1,13 @@
 import { Request, Response } from 'express'
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../../types'
-import { RoleService } from '../../../src/services/role-service'
-import { RoleMapper } from '../../../src/dtos/mappers/role-mapper'
+import { RoleService } from '../../services/role-service'
+import { RoleMapper } from '../../dtos/mappers/role-mapper'
+import {
+  roleCreateScheme,
+  roleUpdateScheme,
+} from '../../presentation/validation/role-validation'
+import { HttpCode, AppError } from '../../libs/exceptions/app-error'
 
 @injectable()
 export default class RoleController {
@@ -17,12 +22,28 @@ export default class RoleController {
     res.status(200).send(role)
   }
   public async createRole(req: Request, res: Response): Promise<void> {
-    const role = RoleMapper.requestToDto(req.body)
+    const parseBody = roleCreateScheme.safeParse(req.body)
+    if (!parseBody.success) {
+      throw new AppError({
+        statusCode: HttpCode.BAD_REQUEST,
+        description: 'Request validation error',
+        data: parseBody.error.flatten(),
+      })
+    }
+    const role = RoleMapper.requestToDto(parseBody.data)
     const roleService = await this._roleService.create(role)
     res.status(200).send(roleService)
   }
   public async updateRole(req: Request, res: Response): Promise<void> {
-    const role = RoleMapper.requestToDto(req.body)
+    const parseBody = roleUpdateScheme.safeParse(req.body)
+    if (!parseBody.success) {
+      throw new AppError({
+        statusCode: HttpCode.BAD_REQUEST,
+        description: 'Request validation error',
+        data: parseBody.error.flatten(),
+      })
+    }
+    const role = RoleMapper.requestToDto(parseBody.data)
     const roleService = await this._roleService.update(req.params.id, role)
     res.status(200).send(roleService)
   }

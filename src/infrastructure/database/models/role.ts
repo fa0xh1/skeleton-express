@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize'
 import { sequelize } from '../sequelize'
-import { Permission } from '../../../../src/domain/models/permission'
+import { Permission } from '../../../domain/models/permission'
 
 interface RoleAttributes {
   id: string

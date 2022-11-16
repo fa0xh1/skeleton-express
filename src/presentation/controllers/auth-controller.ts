@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { inject, injectable } from 'inversify'
-// import { AuthDtoMapper } from '../../../src/dtos/mappers/auth-mapper'
-import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
-import { AuthService } from '../../../src/services/auth-service'
+// import { AuthDtoMapper } from '@/dtos/mappers/auth-mapper'
+import { UserMapper } from '../../dtos/mappers/user-mapper'
+import { AuthService } from '../../services/auth-service'
 import { TYPES } from '../../types'
 // import { Authorization } from '../../libs/authorization'
 @injectable()

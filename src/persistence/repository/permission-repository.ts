@@ -1,20 +1,21 @@
 import { Permission as EntityPermission } from '../../domain/models/permission'
 import { IPermissionRepository } from '../../domain/service/interface-permission-repository'
 import { injectable } from 'inversify'
-import { ResourceNotFound } from '../../../src/libs/errors'
-import { PermissionMapper } from '../../../src/dtos/mappers/permission-mapper'
+import { ResourceNotFound } from '../../libs/errors'
+import { PermissionMapper } from '../../dtos/mappers/permission-mapper'
 import {
   Permission,
   PermissionInstance,
 } from '../../infrastructure/database/models'
-import { PermissionCreateDto } from 'src/dtos/permission-dto'
+import { PermissionCreateDto } from '../../dtos/permission-dto'
 
 @injectable()
 export class PermissionSequelizeRepository implements IPermissionRepository {
   async findAll(): Promise<EntityPermission[]> {
-    const permissions = await (<Promise<PermissionInstance[]>>(
-      Permission.findAll({ attributes: ['id', 'name', 'description'] })
-    ))
+    const permissions = await Permission.findAll({
+      attributes: ['id', 'name', 'description'],
+    })
+
     return permissions.map((permission) =>
       PermissionMapper.toDomain(permission),
     )

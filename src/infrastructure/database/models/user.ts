@@ -2,7 +2,7 @@ import * as Sequelize from 'sequelize'
 import { sequelize } from '../sequelize'
 import { UnmarshalledUser } from '../../../domain/models/user'
 import bcrypt from 'bcrypt'
-import { Role } from '../../../../src/domain/models/role'
+import { Role } from '../../../domain/models/role'
 
 interface UserAttributes {
   id: string
