@@ -32,7 +32,7 @@ const User = sequelize.define<UserInstance, UnmarshalledUser>('user', {
   },
   email: {
     unique: true,
-    allowNull: false,
+    allowNull: true,
     type: Sequelize.STRING,
   },
   password: {

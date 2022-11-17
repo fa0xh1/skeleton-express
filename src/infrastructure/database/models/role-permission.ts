@@ -27,11 +27,11 @@ const RolePermission = sequelize.define<RolePermissionInstance>(
       unique: true,
     },
     role_id: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.STRING,
     },
     permission_id: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.STRING,
     },
   },
