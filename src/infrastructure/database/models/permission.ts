@@ -29,7 +29,7 @@ const Permission = sequelize.define<PermissionInstance>('permission', {
     type: DataTypes.STRING,
   },
   description: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
   },
 })

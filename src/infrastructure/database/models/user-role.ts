@@ -25,11 +25,11 @@ const UserRole = sequelize.define<UserRoleInstance>('user_has_role', {
     unique: true,
   },
   user_id: {
-    allowNull: true,
+    allowNull: false,
     type: DataTypes.STRING,
   },
   role_id: {
-    allowNull: true,
+    allowNull: false,
     type: DataTypes.STRING,
   },
 })
