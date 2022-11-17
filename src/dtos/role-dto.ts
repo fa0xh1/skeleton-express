@@ -1,11 +1,11 @@
 export interface RoleCreateDto {
   name: string
-  description: string
+  description?: string
 }
 export interface RoleDto {
   id: string
   name: string
-  description: string
+  description?: string
 }
 
 export interface UserRoleCreateDto {

@@ -1,6 +1,6 @@
 interface PermissionBaseDto {
   name: string
-  description: string
+  description?: string
 }
 export type PermissionCreateDto = PermissionBaseDto
 export type PermissionUpdateDto = PermissionBaseDto

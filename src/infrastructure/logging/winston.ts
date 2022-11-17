@@ -6,11 +6,5 @@ export const logger = createLogger({
       filename: 'skeleton-general.log',
     }),
   ],
-  format: format.combine(
-    format.colorize(),
-    format.timestamp(),
-    format.printf(({ timestamp, level, message }) => {
-      return `[${timestamp}] ${level}: ${message}`
-    }),
-  ),
+  format: format.combine(format.colorize(), format.timestamp(), format.json()),
 })

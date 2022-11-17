@@ -1,10 +1,9 @@
-import { Role as EntityRole } from '../../domain/models/role'
+import { Role as EntityRole, UnmarshalledRole } from '../../domain/models/role'
 import { IRoleRepository } from '../../domain/service/interface-role-repository'
 import { injectable } from 'inversify'
-import { ResourceNotFound } from '../../libs/errors'
 import { RoleMapper } from '../../dtos/mappers/role-mapper'
 import { Role, RoleInstance } from '../../infrastructure/database/models'
-import { RoleCreateDto } from '../../dtos/role-dto'
+import { AppError, HttpCode } from '../../libs/exceptions/app-error'
 @injectable()
 export class RoleSequelizeRepository implements IRoleRepository {
   async findAll(): Promise<EntityRole[]> {
@@ -18,35 +17,38 @@ export class RoleSequelizeRepository implements IRoleRepository {
   async findById(id: string): Promise<EntityRole> {
     const role = await Role.findByPk<RoleInstance>(id)
     if (!role) {
-      throw new ResourceNotFound('Role', { id })
+      throw new AppError({
+        statusCode: HttpCode.NOT_FOUND,
+        description: 'Role was not found',
+      })
     }
-
     return RoleMapper.toDomain(role)
   }
 
-  async create(roleDto: RoleCreateDto): Promise<EntityRole> {
+  async create(roleDomain: UnmarshalledRole): Promise<EntityRole> {
     try {
-      const role = RoleMapper.toEntity(roleDto)
+      const role = RoleMapper.toEntity(roleDomain)
       const roleModel = await Role.create(role.unmarshal())
       const entity = RoleMapper.toDomain(roleModel)
       return entity
     } catch (e) {
-      throw {
-        statusCode: 500,
-        message: e,
-      }
+      throw new AppError({
+        statusCode: HttpCode.BAD_REQUEST,
+        description: 'Failed to create role',
+        error: e,
+      })
     }
   }
 
-  async update(id: string, roleDto: RoleCreateDto): Promise<EntityRole> {
+  async update(id: string, roleDomain: UnmarshalledRole): Promise<EntityRole> {
     const role = await Role.findByPk(id)
     if (!role) {
-      throw {
-        statusCode: 404,
-        message: 'Role was not found',
-      }
+      throw new AppError({
+        statusCode: HttpCode.NOT_FOUND,
+        description: 'Role was not found',
+      })
     }
-    await role.update(roleDto)
+    await role.update(roleDomain)
     await role.reload()
     const entity = RoleMapper.toDomain(role)
 

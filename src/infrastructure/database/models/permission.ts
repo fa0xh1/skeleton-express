@@ -5,7 +5,7 @@ import { sequelize } from '../sequelize'
 interface PermissionAttributes {
   id: string
   name: string
-  description: string
+  description?: string
 }
 
 type PermissionCreationAttributes = Optional<PermissionAttributes, 'id'>

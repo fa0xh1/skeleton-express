@@ -25,19 +25,19 @@ export class RoleMapper {
     return Role.create({
       id: raw.id,
       name: raw.name,
-      description: raw.name,
+      description: raw.description,
     })
   }
 
   public static toEntity(raw: RoleCreateDto): Role {
     return Role.create({
       name: raw.name,
-      description: raw.name,
+      description: raw.description,
     })
   }
 }
 
 interface roleRequest {
   name: string
-  description: string
+  description?: string
 }

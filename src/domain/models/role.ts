@@ -3,7 +3,7 @@ import { Entity } from './entity'
 export interface UnmarshalledRole {
   id?: string
   name: string
-  description: string
+  description?: string
 }
 
 export class Role extends Entity<UnmarshalledRole> {
@@ -33,7 +33,7 @@ export class Role extends Entity<UnmarshalledRole> {
     return this.props.name
   }
 
-  get description(): string {
+  get description(): string | undefined {
     return this.props.description
   }
 }

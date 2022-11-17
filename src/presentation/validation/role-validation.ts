@@ -2,12 +2,20 @@ import { z } from 'zod'
 
 export const roleCreateScheme = z.object({
   name: z.string(),
-  description: z.string(),
+  description: z
+    .string()
+    .nullish()
+    .nullable()
+    .transform((value) => value ?? undefined),
 })
 
 export const roleUpdateScheme = z.object({
   name: z.string(),
-  description: z.string(),
+  description: z
+    .string()
+    .nullish()
+    .nullable()
+    .transform((value) => value ?? undefined),
 })
 
 export const rolePermissionScheme = z.object({

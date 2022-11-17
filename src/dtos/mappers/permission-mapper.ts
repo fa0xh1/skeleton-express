@@ -28,19 +28,19 @@ export class PermissionMapper {
     return Permission.create({
       id: raw.id,
       name: raw.name,
-      description: raw.name,
+      description: raw.description,
     })
   }
 
   public static toEntity(raw: PermissionCreateDto): Permission {
     return Permission.create({
       name: raw.name,
-      description: raw.name,
+      description: raw.description,
     })
   }
 }
 
 interface permissionRequest {
   name: string
-  description: string
+  description?: string
 }

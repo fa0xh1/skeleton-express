@@ -27,7 +27,7 @@ class ErrorHandler {
       statusCode: error.statusCode,
       message: error.message,
       data: error.data,
-      e: error.error,
+      // e: error.error,
     })
   }
 

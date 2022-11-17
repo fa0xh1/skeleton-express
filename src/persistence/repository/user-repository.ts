@@ -46,10 +46,10 @@ export class UserSequelizeRepository implements IUserRepository {
   async update(id: string, userDomain: UnmarshalledUser): Promise<EntityUser> {
     const user = await User.findByPk(id)
     if (!user) {
-      throw {
-        statusCode: 404,
-        message: 'User was not found',
-      }
+      throw new AppError({
+        statusCode: HttpCode.NOT_FOUND,
+        description: 'User was not found',
+      })
     }
     await user.update(userDomain)
     await user.reload()
@@ -61,10 +61,10 @@ export class UserSequelizeRepository implements IUserRepository {
   async delete(id: string): Promise<boolean> {
     const user = await User.findByPk(id)
     if (!user) {
-      throw {
-        statusCode: 404,
-        message: 'Your fucking user was not found',
-      }
+      throw new AppError({
+        statusCode: HttpCode.NOT_FOUND,
+        description: 'User was not found',
+      })
     }
     await user.destroy()
     return true

@@ -3,7 +3,7 @@ import { Entity } from './entity'
 export interface UnmarshalledPermission {
   id?: string
   name: string
-  description: string
+  description?: string
 }
 
 export class Permission extends Entity<UnmarshalledPermission> {
@@ -33,7 +33,7 @@ export class Permission extends Entity<UnmarshalledPermission> {
     return this.props.name
   }
 
-  get description(): string {
+  get description(): string | undefined {
     return this.props.description
   }
 }

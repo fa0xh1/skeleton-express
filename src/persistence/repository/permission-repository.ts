@@ -1,13 +1,16 @@
-import { Permission as EntityPermission } from '../../domain/models/permission'
+import {
+  Permission as EntityPermission,
+  UnmarshalledPermission,
+} from '../../domain/models/permission'
 import { IPermissionRepository } from '../../domain/service/interface-permission-repository'
 import { injectable } from 'inversify'
-import { ResourceNotFound } from '../../libs/errors'
 import { PermissionMapper } from '../../dtos/mappers/permission-mapper'
 import {
   Permission,
   PermissionInstance,
 } from '../../infrastructure/database/models'
 import { PermissionCreateDto } from '../../dtos/permission-dto'
+import { AppError, HttpCode } from '../../libs/exceptions/app-error'
 
 @injectable()
 export class PermissionSequelizeRepository implements IPermissionRepository {
@@ -24,31 +27,44 @@ export class PermissionSequelizeRepository implements IPermissionRepository {
   async findById(id: string): Promise<EntityPermission> {
     const permission = await Permission.findByPk<PermissionInstance>(id)
     if (!permission) {
-      throw new ResourceNotFound('Permission', { id })
+      throw new AppError({
+        statusCode: HttpCode.NOT_FOUND,
+        description: 'Role was not found',
+      })
     }
 
     return PermissionMapper.toDomain(permission)
   }
 
-  async create(permissionDto: PermissionCreateDto): Promise<EntityPermission> {
-    const permission = PermissionMapper.toEntity(permissionDto)
-    const permissionModel = await Permission.create(permission.unmarshal())
-    const entity = PermissionMapper.toDomain(permissionModel)
-    return entity
+  async create(
+    permissionDomain: UnmarshalledPermission,
+  ): Promise<EntityPermission> {
+    try {
+      const permission = PermissionMapper.toEntity(permissionDomain)
+      const permissionModel = await Permission.create(permission.unmarshal())
+      const entity = PermissionMapper.toDomain(permissionModel)
+      return entity
+    } catch (e) {
+      throw new AppError({
+        statusCode: HttpCode.BAD_REQUEST,
+        description: 'Failed to create permission',
+        error: e,
+      })
+    }
   }
 
   async update(
     id: string,
-    permissionDto: PermissionCreateDto,
+    permissionDomain: PermissionCreateDto,
   ): Promise<EntityPermission> {
     const permission = await Permission.findByPk(id)
     if (!permission) {
-      throw {
-        statusCode: 404,
-        message: 'Permission was not found',
-      }
+      throw new AppError({
+        statusCode: HttpCode.NOT_FOUND,
+        description: 'Role was not found',
+      })
     }
-    await permission.update(permissionDto)
+    await permission.update(permissionDomain)
     await permission.reload()
     const entity = PermissionMapper.toDomain(permission)
 

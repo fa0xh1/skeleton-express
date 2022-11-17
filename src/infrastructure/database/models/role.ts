@@ -6,7 +6,7 @@ import { UnmarshalledRole } from '../../../domain/models/role'
 interface RoleAttributes {
   id: string
   name: string
-  description: string
+  description?: string
 }
 
 type RoleCreationAttributes = Sequelize.Optional<RoleAttributes, 'id'>
@@ -18,11 +18,11 @@ interface RoleInstance
   updatedAt?: Date
   addPermission: Sequelize.BelongsToManyAddAssociationMixin<
     Permission,
-    string | string[]
+    string[]
   >
   removePermission: Sequelize.BelongsToManyRemoveAssociationMixin<
     Permission,
-    string | string[]
+    string[]
   >
 }
 
@@ -35,6 +35,7 @@ const Role = sequelize.define<RoleInstance, UnmarshalledRole>('role', {
     unique: true,
   },
   name: {
+    unique: true,
     allowNull: false,
     type: Sequelize.DataTypes.STRING,
   },
