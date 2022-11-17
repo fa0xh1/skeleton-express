@@ -15,6 +15,7 @@ interface UserPermissionInstance
   createdAt?: Date
   updatedAt?: Date
 }
+//fix git
 
 const UserPermission = sequelize.define<UserPermissionInstance>(
   'user_has_Permission',

@@ -15,6 +15,7 @@ interface RolePermissionInstance
   createdAt?: Date
   updatedAt?: Date
 }
+//fix git
 
 const RolePermission = sequelize.define<RolePermissionInstance>(
   'Role_has_Permission',

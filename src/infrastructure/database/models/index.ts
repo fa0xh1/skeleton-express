@@ -10,6 +10,7 @@ User.belongsToMany(Role, {
   otherKey: 'role_id',
   // as: 'role',
 })
+//fix git
 
 Role.belongsToMany(User, {
   through: UserRole,

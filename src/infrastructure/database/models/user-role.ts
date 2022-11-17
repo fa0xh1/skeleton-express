@@ -15,6 +15,7 @@ interface UserRoleInstance
   createdAt?: Date
   updatedAt?: Date
 }
+//fix git
 
 const UserRole = sequelize.define<UserRoleInstance>('user_has_role', {
   id: {
