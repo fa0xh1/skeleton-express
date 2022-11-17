@@ -31,7 +31,7 @@ const Role = sequelize.define<RoleInstance, UnmarshalledRole>('role', {
     allowNull: false,
     autoIncrement: false,
     primaryKey: true,
-    type: Sequelize.DataTypes.UUID,
+    type: Sequelize.DataTypes.CHAR,
     unique: true,
   },
   name: {

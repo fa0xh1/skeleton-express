@@ -23,7 +23,7 @@ const UserPermission = sequelize.define<UserPermissionInstance>(
       allowNull: false,
       autoIncrement: false,
       primaryKey: true,
-      type: DataTypes.UUID,
+      type: DataTypes.CHAR,
       unique: true,
     },
     user_id: {

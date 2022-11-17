@@ -26,7 +26,7 @@ interface UserInstance
 }
 const User = sequelize.define<UserInstance, UnmarshalledUser>('user', {
   id: {
-    type: Sequelize.STRING,
+    type: Sequelize.CHAR,
     primaryKey: true,
   },
   email: {
