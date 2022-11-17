@@ -20,9 +20,7 @@ export class AccessControllManager implements IAccessControll {
           message: 'User was not found',
         }
       }
-      await user.addRole(userHasRole.unmarshal().role_id, {
-        through: { id: userHasRole.id },
-      })
+      await user.addRole(userHasRole.unmarshal().role_id)
     } catch (e) {
       console.error(e)
       throw {
@@ -72,9 +70,7 @@ export class AccessControllManager implements IAccessControll {
           message: 'Role was not found',
         }
       }
-      await role.addPermission(roleHasPermission.unmarshal().permission_id, {
-        through: { id: roleHasPermission.id },
-      })
+      await role.addPermission(roleHasPermission.unmarshal().permission_id)
     } catch (e) {
       console.error(e)
       throw {

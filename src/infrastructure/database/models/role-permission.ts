@@ -1,42 +1,33 @@
-import { Model, Optional, DataTypes } from 'sequelize'
+import { UnmarshalledRoleHasPermission } from '../../../domain/models/role-permission'
+import { Model, DataTypes } from 'sequelize'
 import { sequelize } from '../sequelize'
 
 interface RolePermissionAttributes {
-  id: string
   role_id: string
   permission_id: string
 }
 
-type RolePermissionCreationAttributes = Optional<RolePermissionAttributes, 'id'>
-
 interface RolePermissionInstance
-  extends Model<RolePermissionAttributes, RolePermissionCreationAttributes>,
+  extends Model<RolePermissionAttributes>,
     RolePermissionAttributes {
   createdAt?: Date
   updatedAt?: Date
 }
-//fix git
 
-const RolePermission = sequelize.define<RolePermissionInstance>(
-  'Role_has_Permission',
-  {
-    id: {
-      allowNull: false,
-      autoIncrement: false,
-      primaryKey: true,
-      type: DataTypes.UUID,
-      unique: true,
-    },
-    role_id: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
-    permission_id: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
+const RolePermission = sequelize.define<
+  RolePermissionInstance,
+  UnmarshalledRoleHasPermission
+>('role_has_Permission', {
+  role_id: {
+    allowNull: false,
+    type: DataTypes.STRING,
   },
-)
+  permission_id: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+})
+RolePermission.removeAttribute('id')
 RolePermission.sync({ alter: { drop: false } })
 
 export { RolePermission }

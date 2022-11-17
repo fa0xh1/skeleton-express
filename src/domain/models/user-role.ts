@@ -1,15 +1,13 @@
-import { Entity } from './entity'
-
 export interface UnmarshalledUserHasRole {
-  id?: string
   user_id: string
-  role_id: string | string[]
+  role_id: string[]
 }
 
-export class UserHasRole extends Entity<UnmarshalledUserHasRole> {
+export class UserHasRole {
+  protected props: UnmarshalledUserHasRole
+
   private constructor(props: UnmarshalledUserHasRole) {
-    const { id, ...data } = props
-    super(data, id)
+    this.props = props
   }
 
   public static create(props: UnmarshalledUserHasRole): UserHasRole {
@@ -19,21 +17,16 @@ export class UserHasRole extends Entity<UnmarshalledUserHasRole> {
 
   public unmarshal(): UnmarshalledUserHasRole {
     return {
-      id: this.id,
       user_id: this.user,
       role_id: this.role,
     }
-  }
-
-  get id(): string {
-    return this._id
   }
 
   get user(): string {
     return this.props.user_id
   }
 
-  get role(): string | string[] {
+  get role(): string[] {
     return this.props.role_id
   }
 }

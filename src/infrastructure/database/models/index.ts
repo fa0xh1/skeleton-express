@@ -8,9 +8,7 @@ User.belongsToMany(Role, {
   through: UserRole,
   foreignKey: 'user_id',
   otherKey: 'role_id',
-  // as: 'role',
 })
-//fix git
 
 Role.belongsToMany(User, {
   through: UserRole,

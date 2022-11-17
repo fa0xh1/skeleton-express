@@ -24,7 +24,6 @@ interface UserInstance
     string | string[]
   >
 }
-//fix git
 const User = sequelize.define<UserInstance, UnmarshalledUser>('user', {
   id: {
     type: Sequelize.STRING,

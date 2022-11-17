@@ -1,3 +1,4 @@
+import { UnmarshalledPermission } from '../../../domain/models/permission'
 import { Model, Optional, DataTypes } from 'sequelize'
 import { sequelize } from '../sequelize'
 
@@ -15,25 +16,27 @@ interface PermissionInstance
   createdAt?: Date
   updatedAt?: Date
 }
-//fix git
 
-const Permission = sequelize.define<PermissionInstance>('permission', {
-  id: {
-    allowNull: false,
-    autoIncrement: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    unique: true,
+const Permission = sequelize.define<PermissionInstance, UnmarshalledPermission>(
+  'permission',
+  {
+    id: {
+      allowNull: false,
+      autoIncrement: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      unique: true,
+    },
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
+    description: {
+      allowNull: true,
+      type: DataTypes.STRING,
+    },
   },
-  name: {
-    allowNull: false,
-    type: DataTypes.STRING,
-  },
-  description: {
-    allowNull: true,
-    type: DataTypes.STRING,
-  },
-})
+)
 Permission.sync({ alter: { drop: false } })
 
 export { Permission, PermissionInstance }

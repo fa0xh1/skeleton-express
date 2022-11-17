@@ -1,6 +1,7 @@
 import * as Sequelize from 'sequelize'
 import { sequelize } from '../sequelize'
 import { Permission } from '../../../domain/models/permission'
+import { UnmarshalledRole } from '../../../domain/models/role'
 
 interface RoleAttributes {
   id: string
@@ -24,9 +25,8 @@ interface RoleInstance
     string | string[]
   >
 }
-//fix git
 
-const Role = sequelize.define<RoleInstance>('role', {
+const Role = sequelize.define<RoleInstance, UnmarshalledRole>('role', {
   id: {
     allowNull: false,
     autoIncrement: false,
