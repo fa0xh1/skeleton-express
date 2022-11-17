@@ -58,5 +58,4 @@ interface userRequest {
   username: string
   password: string
   email: string
-  role_id: number
 }

@@ -6,9 +6,9 @@ import { User, UserInstance } from '../../infrastructure/database/models/user'
 import { Role } from '../../infrastructure/database/models/role'
 
 import { JWT_SECRET } from '../../libs/utils'
-import { User as EntityUser } from '../../../src/domain/models/user'
-import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
-import { Permission } from '../../../src/infrastructure/database/models'
+import { User as EntityUser } from '../../domain/models/user'
+import { UserMapper } from '../../dtos/mappers/user-mapper'
+import { Permission } from '../../infrastructure/database/models'
 
 @injectable()
 export class AuthManager implements IAuthManager {

@@ -1,8 +1,8 @@
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../types'
-import { IAuthManager } from '../../src/persistence/manager/auth-interface'
-import { AuthForLoginDto, UserDto } from '../../src/dtos/user-dto'
-import { UserMapper } from '../../src/dtos/mappers/user-mapper'
+import { IAuthManager } from '../persistence/manager/auth-interface'
+import { AuthForLoginDto, UserDto } from '../dtos/user-dto'
+import { UserMapper } from '../dtos/mappers/user-mapper'
 
 @injectable()
 export class AuthService {

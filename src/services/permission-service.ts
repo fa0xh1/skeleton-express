@@ -1,11 +1,8 @@
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../types'
 import { IPermissionRepository } from '../domain/service/interface-permission-repository'
-import {
-  PermissionCreateDto,
-  PermissionDto,
-} from '../../src/dtos/permission-dto'
-import { PermissionMapper } from '../../src/dtos/mappers/permission-mapper'
+import { PermissionCreateDto, PermissionDto } from '../dtos/permission-dto'
+import { PermissionMapper } from '../dtos/mappers/permission-mapper'
 
 @injectable()
 export class PermissionService {

@@ -3,8 +3,8 @@ import { inject, injectable } from 'inversify'
 import {
   UserHasRoleMapper,
   RoleHasPermissionMapper,
-} from '../../../src/dtos/mappers/access-controll-mapper'
-import { AccessControllService } from '../../../src/services/access-controll'
+} from '../../dtos/mappers/access-controll-mapper'
+import { AccessControllService } from '../../services/access-controll'
 import { TYPES } from '../../types'
 @injectable()
 export default class AccessControllController {

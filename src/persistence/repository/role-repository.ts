@@ -1,16 +1,17 @@
 import { Role as EntityRole } from '../../domain/models/role'
 import { IRoleRepository } from '../../domain/service/interface-role-repository'
 import { injectable } from 'inversify'
-import { ResourceNotFound } from '../../../src/libs/errors'
-import { RoleMapper } from '../../../src/dtos/mappers/role-mapper'
-import { Role, RoleInstance } from '../../../src/infrastructure/database/models'
-import { RoleCreateDto } from '../../../src/dtos/role-dto'
+import { ResourceNotFound } from '../../libs/errors'
+import { RoleMapper } from '../../dtos/mappers/role-mapper'
+import { Role, RoleInstance } from '../../infrastructure/database/models'
+import { RoleCreateDto } from '../../dtos/role-dto'
 @injectable()
 export class RoleSequelizeRepository implements IRoleRepository {
   async findAll(): Promise<EntityRole[]> {
-    const roles = await (<Promise<RoleInstance[]>>(
-      Role.findAll({ attributes: ['id', 'name', 'description'] })
-    ))
+    const roles = await Role.findAll({
+      attributes: ['id', 'name', 'description'],
+    })
+
     return roles.map((role) => RoleMapper.toDomain(role))
   }
 

@@ -2,7 +2,7 @@ import { PermissionCreateDto, PermissionDto } from '../permission-dto'
 import {
   UnmarshalledPermission,
   Permission,
-} from '../../../src/domain/models/permission'
+} from '../../domain/models/permission'
 
 export class PermissionMapper {
   public static requestToDto(raw: permissionRequest): PermissionCreateDto {

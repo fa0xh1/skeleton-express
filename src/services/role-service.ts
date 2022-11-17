@@ -1,8 +1,8 @@
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../types'
 import { IRoleRepository } from '../domain/service/interface-role-repository'
-import { RoleCreateDto, RoleDto } from '../../src/dtos/role-dto'
-import { RoleMapper } from '../../src/dtos/mappers/role-mapper'
+import { RoleCreateDto, RoleDto } from '../dtos/role-dto'
+import { RoleMapper } from '../dtos/mappers/role-mapper'
 
 @injectable()
 export class RoleService {

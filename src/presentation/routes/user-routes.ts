@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { inject, injectable } from 'inversify'
-import asyncWrap from '../../../src/libs/asyncWrapper'
-import { container } from '../../../src/container'
+import asyncWrap from '../../libs/asyncWrapper'
+import { container } from '../../container'
 import UserController from '../controllers/user-controller'
 import { TYPES } from '../../types'
 import { AuthMiddleware } from '../middlewares/check-jwt'
@@ -78,10 +78,10 @@ export class UserRoutes {
 
 // import { Router } from 'express'
 // import { inject, injectable } from 'inversify'
-// // import { UserMemoryRepository } from '../../../src/persistence/repository/user.repository'
+// // import { UserMemoryRepository } from '@/persistence/repository/user.repository'
 // import { TYPES } from '../../types'
-// import { UserDtoMapper } from '../../../src/dtos/mappers/user'
-// // import { UserService } from '../../../src/services/user'
+// import { UserDtoMapper } from '@/dtos/mappers/user'
+// // import { UserService } from '@/services/user'
 // @injectable()
 // export class UserRoutes {
 //   public route = 'User'

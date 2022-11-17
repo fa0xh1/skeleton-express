@@ -1,12 +1,12 @@
 import { injectable } from 'inversify'
-import { IAccessControll } from '../../../src/domain/service/interface-access-controll'
-import { UnmarshalledUserHasRole } from '../../../src/domain/models/user-role'
-import { UnmarshalledRoleHasPermission } from '../../../src/domain/models/role-permission'
-import { Role, User } from '../../../src/infrastructure/database/models'
+import { IAccessControll } from '../../domain/service/interface-access-controll'
+import { UnmarshalledUserHasRole } from '../../domain/models/user-role'
+import { UnmarshalledRoleHasPermission } from '../../domain/models/role-permission'
+import { Role, User } from '../../infrastructure/database/models'
 import {
   RoleHasPermissionMapper,
   UserHasRoleMapper,
-} from '../../../src/dtos/mappers/access-controll-mapper'
+} from '../../dtos/mappers/access-controll-mapper'
 
 @injectable()
 export class AccessControllManager implements IAccessControll {

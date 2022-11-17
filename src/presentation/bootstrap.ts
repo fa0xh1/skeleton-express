@@ -1,21 +1,10 @@
 import * as bodyParser from 'body-parser'
 import express, { Request, Response, NextFunction } from 'express'
 import { Routes } from './routes/routes'
-import { AppError } from '../../src/libs/exceptions/app-error'
-import { errorHandler } from '../../src/libs/exceptions/error-handler'
-import { logger } from '../../src/libs/logger'
-// class AppError extends Error {
-//   statusCode: number
+import { AppError } from '../libs/exceptions/app-error'
+import { errorHandler } from '../libs/exceptions/error-handler'
+import { logger } from '../infrastructure/logging/winston'
 
-//   constructor(statusCode: number, message: string) {
-//     super(message)
-
-//     Object.setPrototypeOf(this, new.target.prototype)
-//     this.name = Error.name
-//     this.statusCode = statusCode
-//     Error.captureStackTrace(this)
-//   }
-// }
 export class Bootstrap {
   public app = express()
 
@@ -48,8 +37,7 @@ export class Bootstrap {
       response: Response,
       next: NextFunction,
     ) => {
-      logger.error(error.error.toJson())
-      // console.log(`error ${error.error.toJson()}`)
+      logger.error(error.error)
       next(error) // calling next middleware
     }
 

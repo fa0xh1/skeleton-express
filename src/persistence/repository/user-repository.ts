@@ -1,20 +1,17 @@
-import {
-  UnmarshalledUser,
-  User as EntityUser,
-} from '../../../src/domain/models/user'
+import { UnmarshalledUser, User as EntityUser } from '../../domain/models/user'
 import { IUserRepository } from '../../domain/service/interface-user-repository'
 import { injectable } from 'inversify'
-import { AppError, HttpCode } from '../../../src/libs/exceptions/app-error'
-import { ResourceNotFound } from '../../../src/libs/errors'
-import { UserMapper } from '../../../src/dtos/mappers/user-mapper'
+import { AppError, HttpCode } from '../../libs/exceptions/app-error'
+import { UserMapper } from '../../dtos/mappers/user-mapper'
 import { Role, User, UserInstance } from '../../infrastructure/database/models'
 
 @injectable()
 export class UserSequelizeRepository implements IUserRepository {
   async findAll(): Promise<EntityUser[]> {
-    const users = await (<Promise<UserInstance[]>>(
-      User.findAll({ attributes: ['id', 'username', 'email'] })
-    ))
+    const users = await User.findAll({
+      attributes: ['id', 'username', 'email'],
+    })
+
     return users.map((user) => UserMapper.toDomain(user))
   }
 

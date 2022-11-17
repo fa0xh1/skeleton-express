@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { injectable } from 'inversify'
-import asyncWrap from '../../../src/libs/asyncWrapper'
-import { container } from '../../../src/container'
+import asyncWrap from '../../libs/asyncWrapper'
+import { container } from '../../container'
 import AccessControll from '../controllers/access-controll-controller'
 @injectable()
 export class AccessControllRoutes {
