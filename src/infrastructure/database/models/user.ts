@@ -55,7 +55,6 @@ User.beforeSave(async (user: UserInstance) => {
 User.prototype.comparePassword = async function (
   password: string,
 ): Promise<boolean> {
-  // console.log(passwd)
   return bcrypt.compare(password, this.password)
 }
 User.sync({ alter: { drop: false } })
