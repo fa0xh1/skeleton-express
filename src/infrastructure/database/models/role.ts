@@ -25,6 +25,7 @@ interface RoleInstance
     string | string[]
   >
 }
+//fix git
 
 const Role = sequelize.define<RoleInstance>(
   'role',

@@ -16,6 +16,7 @@ interface PermissionInstance
   updated_at: Date
   deleted_at: Date
 }
+//fix git
 
 const Permission = sequelize.define<PermissionInstance>(
   'permission',
